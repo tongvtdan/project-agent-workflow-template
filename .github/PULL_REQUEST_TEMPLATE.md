@@ -2,9 +2,9 @@
 
 `<1-3 sentences on what changed and why>`
 
-Closes #<issue-number>
+Closes #ISSUE_NUMBER
 
-Replace the placeholder with a real issue number in plain text. Remove the line when no issue exists.
+Replace ISSUE_NUMBER with a real issue number in plain text, for example `Closes #12`. Remove the line when no issue exists.
 
 ## Changes
 

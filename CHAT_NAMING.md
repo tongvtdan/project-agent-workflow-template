@@ -26,9 +26,9 @@ Projectless chats use a concise descriptive title with no prefix or sequence.
 2. Preserve existing valid assignments, including legacy titles unless an individual correction is authorized.
 3. Inspect available project chats, archives, recorded assignments, linked platform histories, and other accessible hosts. Record inventory coverage and limitations; a capped listing is partial evidence.
 4. Resolve identity conflicts, duplicate assignments, or ambiguous numbering before allocating. Never reuse a recorded number, fill a historical gap, merge project counters, or claim a partial inventory is complete.
-5. If checked evidence shows no linked platform or host assignments, the checked local maximum plus one is a candidate. Recheck for concurrent assignments immediately before setting the title.
-6. Use a supported native title setter, then verify the saved title. A response heading is not a sidebar rename.
-7. Record the assignment only after verification. Use one writer for the record. An unverified attempted assignment stays pending and its candidate number is reserved until resolved.
+5. Use one more than the highest recorded or reserved number across inspected assignments as a candidate. If checked evidence shows no linked platform/host assignments, the checked local maximum plus one is a candidate; UNKNOWN linked coverage is not evidence of absence.
+6. Recheck concurrent assignments and reserve the candidate in the shared record under exclusive writer ownership before setting the title. If a shared record or exclusive ownership cannot be established, skip allocation rather than claim a collision-free number.
+7. Use a supported native title setter, then verify the saved title. Only then mark the reserved record verified and record the saved title/reference. A response heading is not a sidebar rename. An unverified or failed attempt keeps its reservation pending until explicitly resolved; do not silently free or reuse it.
 
 Use at least two digits; after 99 continue to 100 without wrapping. Retain existing larger numbers and reserved assignments. If safe allocation remains uncertain, skip naming and continue work.
 

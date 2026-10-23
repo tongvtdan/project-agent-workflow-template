@@ -14,7 +14,7 @@ For a filled-in example, read [Trail Log](examples/trail-log.md), a fictional of
 6. Fill [PROJECT_STATE.md](PROJECT_STATE.md) from current evidence. Leave the prefix UNCONFIRMED until the owner confirms it under [CHAT_NAMING.md](CHAT_NAMING.md). Examples never assign a real prefix or sequence.
 7. Review [SHORTCUTS.md](SHORTCUTS.md) once. These aliases work through project instructions; they are not registered native slash commands.
 8. Adapt [app/AGENTS.md](app/AGENTS.md) only if the app folder has different placement or command rules. Rename/move it to the actual app root and correct its relative links; remove it when unnecessary.
-9. Configure the opt-in [.github/workflows/ci.yml.example](.github/workflows/ci.yml.example), then rename it to ci.yml. Set the workflow's enabled field to true. Require the actual lint-test-build check and any project-specific gates; preserve existing protection/review requirements.
+9. Configure the opt-in [.github/workflows/ci.yml.example](.github/workflows/ci.yml.example), then rename it to ci.yml. In WORKFLOW.md, set the documentation field `ci.enabled` to `true`; do not add an `enabled` key to the GitHub Actions YAML. Require the actual lint-test-build check and any project-specific gates; preserve existing protection/review requirements.
 10. Replace the template README with a product README when ready. Keep the fictional example as a reference or remove it and update its links.
 
 A template-generated repo copies files, not the original repo's issues, board configuration, branch protection, or external integrations. Configure and verify those in the new project.
@@ -63,7 +63,7 @@ gh project field-list <project-number> --owner <owner>
 
 Inspect the existing Status field first. Configure its options in the UI instead of creating a duplicate. Suggested states: Backlog, Ready, In Progress, In Review, Done, Parked. Record the chosen field/label authority in WORKFLOW.md.
 
-User board URLs follow https://github.com/users/<owner>/projects/<number>; organization board URLs follow https://github.com/orgs/<owner>/projects/<number>. Save the verified URL in project configuration. New boards, issues, and status changes still require task authority.
+User board URLs follow `https://github.com/users/<owner>/projects/<number>`; organization board URLs follow `https://github.com/orgs/<owner>/projects/<number>`. Save the verified URL in project configuration. New boards, issues, and status changes still require task authority.
 
 ## Before first implementation
 
@@ -78,7 +78,7 @@ User board URLs follow https://github.com/users/<owner>/projects/<number>; organ
 Useful placeholder scan:
 
 ```sh
-rg -n '<[^>]+>|TODO|TBD|FIXME' AGENTS.md PROJECT_STATE.md SPEC.md WORKFLOW.md DESIGN.md app .github
+rg -n '<[^>]+>|TODO|TBD|FIXME|ISSUE_NUMBER' AGENTS.md PROJECT_STATE.md SPEC.md WORKFLOW.md DESIGN.md app .github
 git diff --check
 ```
 

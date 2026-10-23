@@ -50,6 +50,8 @@ The example inventory has TL-X-01 | Offline Checklist, TL-C-02 | Activation Expe
 | ChatGPT Work task concerns coding | Use W because the actual environment is Work |
 | Title setter unavailable | Continue the task silently; do not claim a rename |
 | Duplicate 04 assignments found | Resolve conflict before allocating; continue substantive work |
+| Two sessions attempt candidate 04 | Reserve it under exclusive writer ownership before renaming; the other session rechecks the record |
+| Shared reservation ownership cannot be established | Skip allocation and continue the task without claiming a safe number |
 | Native listing is capped | Treat it as partial; check other available recorded evidence |
 | Save succeeds but verification is unavailable | Keep the candidate reserved/pending, not verified |
 

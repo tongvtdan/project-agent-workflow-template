@@ -36,9 +36,11 @@ Read [AGENTS.md](AGENTS.md), [the guardrails](karpathy-guidelines/SKILL.md), rel
 
 Record the actual repository, default branch, implementation root, board, and runnable commands. Choose board Status or status labels as the authoritative state; synchronize a second surface only when explicitly configured.
 
-Use https://github.com/users/<owner>/projects/<number> for personal projects or https://github.com/orgs/<owner>/projects/<number> for organizations. Linking a repository does not automatically add all issues; use configured automation or explicitly add authorized items.
+When using board Status, move the item through its configured options; `status:*` labels in the frontmatter are an optional label-based mapping, not a second required workflow. When using labels, create the chosen labels first and replace the previous status label on each transition. Record the chosen source in PROJECT_STATE.md; required checks and review apply independently of tracker choice.
 
-Configure ci.yml.example, rename to ci.yml, set enabled true above, and verify the actual lint-test-build job before requiring it. Preserve existing required checks and branch protection. The disabled starter is not permission to disable a configured project gate.
+Use `https://github.com/users/<owner>/projects/<number>` for personal projects or `https://github.com/orgs/<owner>/projects/<number>` for organizations. Linking a repository does not automatically add all issues; use configured automation or explicitly add authorized items.
+
+Configure ci.yml.example and rename it to ci.yml. Set `ci.enabled: true` in this document's frontmatter only; it records setup state and does not control GitHub Actions. Do not add an `enabled` field to the Actions YAML. Verify the actual lint-test-build job before requiring it. Preserve existing required checks and branch protection. The disabled starter is not permission to disable a configured project gate.
 
 ## Read-only requests
 
@@ -51,7 +53,7 @@ A compound request such as "review then update the docs" authorizes the specifie
 1. Read the actual task and linked sources. Use an existing issue when available; create/update issues or board items only under established task authorization.
 2. Establish outcome, scope/non-goals, owner/writer, acceptance/failure cases, checks, and review. Challenge weak product rationale and recommend a smaller slice.
 3. Set authorized task state to In Progress; record unavailable external state as PENDING without claiming a successful mutation.
-4. Inspect current files, Git state, and applicable scoped guides. Branch from main unless the actual configured base differs. Use <type>/<issue-number>-<short-slug>, or an owner-approved task slug when no issue exists.
+4. Inspect current files, Git state, and applicable scoped guides. Branch from main unless the actual configured base differs. Use `<type>/<issue-number>-<short-slug>`, or an owner-approved task slug when no issue exists.
 5. Implement one independently verifiable slice with one writer per shared artifact.
 6. Run relevant checks; report PASS, FAIL, or PENDING for each acceptance criterion with actual evidence.
 7. When publishing is authorized, open/update a draft PR linked to the issue. In a submitted PR body use a real closing keyword such as Closes #12 without code formatting.
