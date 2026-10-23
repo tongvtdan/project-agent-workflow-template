@@ -1,99 +1,85 @@
 # Project Agent Workflow Template
 
-Use this repository when starting a product repo that will be worked on by AI coding agents and uses **GitHub Issues, Projects, Pull Requests, and Actions** as its workflow backbone.
+Start a product project with shared instructions for coding agents, a small issue/PR workflow, and explicit evidence for completion.
 
-The goal is to give every project a compact operating system:
+For a filled-in example, read [Trail Log](examples/trail-log.md), a fictional offline packing-checklist app. Product names, prefixes, issue numbers, metrics, and results there are illustrative; they are not live configuration.
 
-- `AGENTS.md`: root contract for all agents.
-- `CLAUDE.md`: Claude-specific orientation that points back to `AGENTS.md`.
-- `CODEX.md`: Codex-specific orientation and implementation loop.
-- `DESIGN.md`: AI-readable design system with tokens, components, UX rules, and product experience guardrails.
-- `SPEC.md`: execution bridge for GitHub issues, sprints, and acceptance criteria.
-- `WORKFLOW.md`: autonomous agent workflow template for a GitHub Issues/PR-driven loop.
-- `app/AGENTS.md`: optional nested guide for the main app folder.
-- `karpathy-guidelines/`: behavioral guardrails skill (simplicity, surgical diffs, verified completion) that agents read before non-trivial work.
-- `.github/ISSUE_TEMPLATE/`: bug report and feature request issue templates.
-- `.github/PULL_REQUEST_TEMPLATE.md`: PR description template tied to the issue workflow.
-- `.github/workflows/ci.yml.example`: opt-in CI starter; rename it to `ci.yml` after configuring the runtime and commands.
+## Start a new project
 
-## How To Use
+1. Choose **Use this template** on the repository to create a new repo, or copy the files (including hidden .github files) into an existing project. For an existing repo, inspect overlapping files and merge instructions instead of overwriting them.
+2. Read the Trail Log example, then fill actual product, stack, ownership, commands, and non-goals in [AGENTS.md](AGENTS.md). Delete irrelevant sections.
+3. Fill [DESIGN.md](DESIGN.md) with the actual visual/interaction contract. It is a detailed reference; keep only what the MVP needs.
+4. Turn one outcome into an independently verifiable slice in [SPEC.md](SPEC.md).
+5. Configure [WORKFLOW.md](WORKFLOW.md) for the actual repository, default branch, board, and required checks. Its frontmatter is documentation, not an installed automation.
+6. Fill [PROJECT_STATE.md](PROJECT_STATE.md) from current evidence. Leave the prefix UNCONFIRMED until the owner confirms it under [CHAT_NAMING.md](CHAT_NAMING.md). Examples never assign a real prefix or sequence.
+7. Review [SHORTCUTS.md](SHORTCUTS.md) once. These aliases work through project instructions; they are not registered native slash commands.
+8. Adapt [app/AGENTS.md](app/AGENTS.md) only if the app folder has different placement or command rules. Rename/move it to the actual app root and correct its relative links; remove it when unnecessary.
+9. Configure the opt-in [.github/workflows/ci.yml.example](.github/workflows/ci.yml.example), then rename it to ci.yml. Set the workflow's enabled field to true. Require the actual lint-test-build check and any project-specific gates; preserve existing protection/review requirements.
+10. Replace the template README with a product README when ready. Keep the fictional example as a reference or remove it and update its links.
 
-1. Copy the files into a new project repo, including hidden files in `.github/` and the `karpathy-guidelines/` folder.
-2. Replace every product, stack, repository, project-board, and command placeholder.
-3. Configure `.github/workflows/ci.yml.example`, then rename it to `ci.yml` to enable CI. Delete it if the project is not ready for CI yet.
-4. Delete sections and optional files that do not apply.
-5. Keep root `AGENTS.md` as the highest-level product and execution contract.
-6. Add nested `AGENTS.md` files only where commands, architecture, or safety rules differ.
-7. Create or link the GitHub Project from the repo (see "Creating The GitHub Project" below) and fill in its URL in `AGENTS.md`, `SPEC.md`, and `WORKFLOW.md`.
-8. Enable branch protection on `main` requiring the active CI checks and at least one review before merge.
-9. If the coding agent supports MCP tools, install [code-review-graph](https://github.com/tirth8205/code-review-graph) and point it at the repo. It builds a queryable code graph (callers, dependents, test coverage) so agents can review changes and trace impact without reading whole files, which meaningfully cuts token usage on review- and refactor-heavy tasks.
+A template-generated repo copies files, not the original repo's issues, board configuration, branch protection, or external integrations. Configure and verify those in the new project.
 
-Before the first commit, scan for unfinished setup:
+## What each file owns
 
-```sh
-rg -n '<[^>]+>|TODO|TBD|FIXME' .
-```
+| File | Responsibility | Fictional Trail Log example |
+| --- | --- | --- |
+| [AGENTS.md](AGENTS.md) | Product contract, architecture boundaries, actual commands | Preserve offline checklist saves |
+| [CODEX.md](CODEX.md) / [CLAUDE.md](CLAUDE.md) | Thin tool orientation pointing to shared rules | Same save contract in every coding client |
+| [SHORTCUTS.md](SHORTCUTS.md) | Aliases, operation permissions, MODE perspectives | /Investigate a restart loss; /Fix the specified cause |
+| [CHAT_NAMING.md](CHAT_NAMING.md) | Confirmed prefix, environment marker, shared counter policy | TL-X-01, TL-C-02, TL-W-03 |
+| [PROJECT_STATE.md](PROJECT_STATE.md) | Identity/confirmation, assignments, task/evidence/resume | Save failure is PENDING until checked |
+| [DESIGN.md](DESIGN.md) | UI, tokens, states, copy, accessibility | Visible saving/saved/failed-save states |
+| [SPEC.md](SPEC.md) | Scope, acceptance, issue-sized work | Preserve packed flags across restart |
+| [WORKFLOW.md](WORKFLOW.md) | Issue/branch/PR/review/release loop | Review evidence before closing the issue |
+| [Request library](docs/delivery/reusable-requests.md) | Reusable outcome/scope/failure/evidence requests | Verify failed-save and retry behavior |
+| [Development guide](docs/delivery/development-team.md) | One writer, review, ownership transfer | Separate implementation from assigned QA |
+| [Guardrails](karpathy-guidelines/SKILL.md) | Simple changes, explicit assumptions, verified outcomes | Reject blank items at the owning boundary |
+| [.github/ISSUE_TEMPLATE/feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md) | Feature issue body | Outcome, non-goals, failure acceptance |
+| [.github/ISSUE_TEMPLATE/bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) | Bug issue body | Reproducer and regression evidence |
+| [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) | PR description | Actual commands and remaining gaps |
 
-Recommended placement:
+Keep one source per policy. Adapters link to canonical docs instead of copying them. Flag conflicts before acting; do not silently weaken a contract.
 
-```text
-<project>/
-  AGENTS.md
-  CLAUDE.md
-  CODEX.md
-  DESIGN.md
-  SPEC.md
-  WORKFLOW.md
-  <main_app_folder>/AGENTS.md
-  karpathy-guidelines/
-    SKILL.md
-    references/
-      examples.md
-  .github/
-    ISSUE_TEMPLATE/
-      bug_report.md
-      feature_request.md
-    PULL_REQUEST_TEMPLATE.md
-    workflows/
-      ci.yml.example
-```
+## Naming and alias behavior
 
-## Creating The GitHub Project
+Names use `<PREFIX>-<PLATFORM>-<NN> | <Task or Subsystem>`. X is Codex, C is ChatGPT Chat, W is ChatGPT Work. A project has one counter across those environments. Confirm a prefix once, inspect available inventories/archives/linked assignments, preserve existing numbers, and verify a native saved title before claiming success.
 
-`WORKFLOW.md` and `SPEC.md` assume a GitHub Project (the org/repo-level Kanban board, distinct from Issues themselves) already exists and is linked to the repo. Create it once per repo, using the [GitHub CLI](https://cli.github.com/) (`gh`):
+Without supported tools or sufficient identity/numbering evidence, continue the substantive task silently. A heading is not a title change.
+
+Read-only aliases inspect and explain. /Build and /Fix authorize scoped implementation; /Addtests requests scoped tests; /Release assesses readiness; /Team proposes coordination. External writes, spawning agents, messages, commits, pushes, merges, deployment, and spending require authority from the actual task or project policy.
+
+## GitHub Project setup
+
+Use a user- or organization-owned Project. Reuse an existing board when appropriate; linking it does not automatically add all issues.
+
+Example shell commands below require replacing every angle-bracket placeholder before use:
 
 ```sh
-# 1. Authenticate if needed
 gh auth login
-
-# 2. Create the Project (v2), owned by the org or user account
-gh project create --owner <owner> --title "<Project Name> <release> - <initiative>"
-# -> note the returned project number, used below as <project-number>
-
-# 3. Link the project to this repo so issues/PRs can be added to it
+gh project create --owner <owner> --title "<Project Name> - <initiative>"
 gh project link <project-number> --owner <owner> --repo <owner>/<repo>
-
-# 4. Add a Status field matching the statuses in SPEC.md (skip if it already exists)
-gh project field-create <project-number> --owner <owner> \
-  --name "Status" --data-type SINGLE_SELECT \
-  --single-select-options "Backlog,Ready,In Progress,In Review,Done,Parked"
+gh project field-list <project-number> --owner <owner>
 ```
 
-Equivalent manual steps: open `https://github.com/orgs/<owner>/projects` for an organization or `https://github.com/users/<owner>/projects` for a personal account -> **New project** -> **Link a repository** -> add a single-select **Status** field with the same options.
+Inspect the existing Status field first. Configure its options in the UI instead of creating a duplicate. Suggested states: Backlog, Ready, In Progress, In Review, Done, Parked. Record the chosen field/label authority in WORKFLOW.md.
 
-Once created, record the project URL (`https://github.com/orgs/<owner>/projects/<project-number>` or `https://github.com/users/<owner>/projects/<project-number>`) in `AGENTS.md` ("Local Project Memory"), `SPEC.md` ("Project URL"), and `WORKFLOW.md`, replacing the placeholders.
+User board URLs follow https://github.com/users/<owner>/projects/<number>; organization board URLs follow https://github.com/orgs/<owner>/projects/<number>. Save the verified URL in project configuration. New boards, issues, and status changes still require task authority.
 
-## Fill Order
+## Before first implementation
 
-1. `DESIGN.md`: decide visual tokens, components, interaction rules, product promise, user, loops, and non-goals.
-2. `AGENTS.md`: convert those decisions into agent operating rules.
-3. `SPEC.md`: turn the design into shippable GitHub issue slices.
-4. `CODEX.md` and `CLAUDE.md`: keep tool-specific docs thin.
-5. `WORKFLOW.md`: wire the GitHub Issues -> branch -> PR -> merge loop.
-6. `karpathy-guidelines/`: fill in the real architectural boundaries, high-risk functions, and anti-pattern examples for this codebase.
-7. `.github/`: fill in the issue templates, PR template, and CI commands for the real stack.
-8. `<main_app_folder>/AGENTS.md`: add codebase-specific commands and placement rules.
+- Fill product/architecture/command placeholders; leave unverified claims explicitly pending.
+- Confirm aliases and tool adapters agree about permissions and human review.
+- Confirm naming examples are not live assignments.
+- Make the actual app folder, paths, links, and commands match the repo.
+- Configure/verify CI before requiring its job; retain existing security gates.
+- Define one user outcome with normal, boundary, and failure acceptance.
+- Record actual evidence rather than copying sample results.
 
-## Rule Of Thumb
+Useful placeholder scan:
 
-If a feature does not improve activation, retention, revenue, trust, or distribution, do not let agents build it by default. Challenge the scope and pick a smaller, higher-leverage slice.
+```sh
+rg -n '<[^>]+>|TODO|TBD|FIXME' AGENTS.md PROJECT_STATE.md SPEC.md WORKFLOW.md DESIGN.md app .github
+git diff --check
+```
+
+A placeholder scan helps setup; it is not a complete validation or evidence that the app works. Sample app commands are intentionally not runnable in this docs-only repository.

@@ -1,180 +1,87 @@
 ---
 tracker:
   kind: github
-  repo: "<org>/<repo>"
-  project_url: "https://github.com/orgs/<org>/projects/<number>"
+  repo: "<owner>/<repo>"
+  project_url: "<verified GitHub Project URL>"
   active_labels:
     - status:ready
     - status:in-progress
   review_label: status:in-review
-  terminal_states:
-    - closed
-    - status:parked
 branch:
   naming: "<type>/<issue-number>-<short-slug>"
-  base: "main"
-  release_prefix: "release/"
+  base: main
 pull_request:
   draft_until_ready: true
   require_review: true
   close_keyword: "Closes #<issue-number>"
 ci:
-  workflow_file: ".github/workflows/ci.yml"
+  starter_file: .github/workflows/ci.yml.example
+  workflow_file: .github/workflows/ci.yml
+  enabled: false
   required_checks:
-    - lint
-    - test
-    - build
+    - lint-test-build
 agent:
   max_concurrent_agents: 1
   max_turns: 8
   max_retry_backoff_ms: 300000
 ---
-# <Project Name> Autonomous Workflow
 
-You are an autonomous implementation agent working on `<Project Name>` from a GitHub issue.
+# Issue and delivery workflow
 
-Issue: `#{{ issue.number }}`
-Title: `{{ issue.title }}`
-State: `{{ issue.state }}`
-Labels: `{{ issue.labels }}`
-URL: `{{ issue.html_url }}`
+This is a documented operating contract. Frontmatter does not install a scheduler, GitHub integration, or autonomous runner. Configure supported integrations separately; never store secrets here.
 
-Description:
-{{ issue.body }}
+Read [AGENTS.md](AGENTS.md), [the guardrails](karpathy-guidelines/SKILL.md), relevant [SPEC.md](SPEC.md) sections, and [PROJECT_STATE.md](PROJECT_STATE.md). [SHORTCUTS.md](SHORTCUTS.md) owns operation permissions; [the development guide](docs/delivery/development-team.md) owns writer/reviewer coordination.
 
-Before writing any code, read `karpathy-guidelines/SKILL.md` for the behavioral guardrails (simplicity, surgical diffs, architectural boundaries, verified completion) that govern how this loop is executed.
+## Project configuration
 
-## Product North Star
+Record the actual repository, default branch, implementation root, board, and runnable commands. Choose board Status or status labels as the authoritative state; synchronize a second surface only when explicitly configured.
 
-`<Project Name>` helps `<target user>` achieve `<primary outcome>` through `<core mechanism>`.
+Use https://github.com/users/<owner>/projects/<number> for personal projects or https://github.com/orgs/<owner>/projects/<number> for organizations. Linking a repository does not automatically add all issues; use configured automation or explicitly add authorized items.
 
-Every task must improve at least one of:
+Configure ci.yml.example, rename to ci.yml, set enabled true above, and verify the actual lint-test-build job before requiring it. Preserve existing required checks and branch protection. The disabled starter is not permission to disable a configured project gate.
 
-- First-session activation.
-- Recurring retention.
-- Core trust and data correctness.
-- Subscription or direct revenue conversion after value is demonstrated.
-- Distribution through share, export, referral, content, or channel leverage.
+## Read-only requests
 
-If the issue does not clearly improve one of those, stop and add an issue comment explaining the concern.
+Review, Explain, Investigate, Research, Security, QA, Status, Handoff, and Release inspect evidence without implementation or external mutations. /Plan and /Team produce plans unless the actual request authorizes more.
 
-## Current Ship Path
+A compound request such as "review then update the docs" authorizes the specified edits. No alias by itself grants additional authority.
 
-The current highest-leverage path is:
+## Implementation loop
 
-```text
-<first input> -> <instant value> -> <first proof/output> -> <repeat loop> -> <paid/distribution moment>
-```
+1. Read the actual task and linked sources. Use an existing issue when available; create/update issues or board items only under established task authorization.
+2. Establish outcome, scope/non-goals, owner/writer, acceptance/failure cases, checks, and review. Challenge weak product rationale and recommend a smaller slice.
+3. Set authorized task state to In Progress; record unavailable external state as PENDING without claiming a successful mutation.
+4. Inspect current files, Git state, and applicable scoped guides. Branch from main unless the actual configured base differs. Use <type>/<issue-number>-<short-slug>, or an owner-approved task slug when no issue exists.
+5. Implement one independently verifiable slice with one writer per shared artifact.
+6. Run relevant checks; report PASS, FAIL, or PENDING for each acceptance criterion with actual evidence.
+7. When publishing is authorized, open/update a draft PR linked to the issue. In a submitted PR body use a real closing keyword such as Closes #12 without code formatting.
+8. After required checks, present the reviewable result and set the authorized state to In Review. Report changed artifacts, actual checks/results, unresolved findings, and next risk.
+9. Do not self-merge without explicit owner solo-merge authority. Sensitive data, entitlements, payments, notifications, hardware, migrations, or user-affecting AI decisions require human review.
 
-Keep work focused on `<core surfaces>`. Do not build `<explicit non-goals>` on this path.
+## Verification ladder
 
-## Mandatory GitHub Issue Loop
+| Surface | Evidence |
+| --- | --- |
+| Docs | Internal links, examples, permission/naming consistency, diff whitespace |
+| Narrow behavior | Closest relevant test plus user-visible path |
+| Persistence | Normal, empty/corrupt, failed-save, restart/retry, migration cases as relevant |
+| UI/copy | Tokens, accessibility, localization, empty/loading/error states |
+| Export/artifact | Actual content/structure plus relevant manual/visual inspection |
+| Hardware | Software checks plus actual or pending physical evidence |
+| Shared contract | Affected callers and configured broader checks |
 
-1. Read the issue in full, including linked issues and PR history, before writing code.
-2. Apply the `status:in-progress` label (or move the Project board card) and assign yourself.
-3. Create a branch from `main` named per the `branch.naming` pattern above, e.g. `feature/42-export-retry`.
-4. Work in the smallest shippable slice that satisfies the issue's acceptance criteria.
-5. Open a pull request early (draft is fine) with the title matching the issue and body containing `Closes #<issue-number>`.
-6. Push commits to the branch; let CI run on every push.
-7. When complete, mark the PR ready for review, apply `status:in-review`, and add a PR comment with:
-   - What changed.
-   - Verification commands run.
-   - Pass/fail result.
-   - Any follow-up risk or recommended next issue.
-8. Do not merge the PR yourself unless the repo owner has explicitly said solo-merge is allowed.
-9. Do not merge sensitive data, entitlement, payment, notification, hardware, migration, or AI-decision work without a human review approval.
+Use actual commands from root/scoped AGENTS.md; never report illustrative commands as executed. Record relevant tool/runtime versions. Software checks do not prove hardware qualification, clinical validation, paid demand, or human security approval.
 
-### Workflow Diagram
+## Review, completion, and release
 
-```mermaid
-flowchart TD
-    A[GitHub Issue created] --> B[Triage: apply epic + priority labels]
-    B --> C{Ready?}
-    C -- No --> B
-    C -- Yes --> D["status:ready"]
-    D --> E["Agent/dev picks up issue\nstatus:in-progress + assign self"]
-    E --> F["Create branch\nfeature/&lt;issue-number&gt;-&lt;slug&gt; from main"]
-    F --> G["Implement smallest shippable slice"]
-    G --> H["Open PR (draft ok)\nbody: Closes #&lt;issue-number&gt;"]
-    H --> I["Push commits"]
-    I --> J["CI runs: lint, test, build"]
-    J --> K{CI green?}
-    K -- No --> G
-    K -- Yes --> L["Mark PR ready for review\nstatus:in-review"]
-    L --> M{Reviewer approves?}
-    M -- Changes requested --> G
-    M -- Approved --> N["Merge PR into main"]
-    N --> O["Issue auto-closed via Closes #"]
-    O --> P["Tag and release from main when ready"]
-```
+In Review means implementation awaits required review; open findings and evidence gaps stay explicit. Done requires satisfied acceptance, recorded verification, and merge or explicit acceptance under project policy. Merely documenting a gap does not satisfy it.
 
-## Engineering Rules
+PR closing keywords automatically close linked issues when merged into the default branch. For other targets, close only after required default-branch integration or an authorized manual decision.
 
-- Work from `<app_folder>/` for app commands.
-- Follow existing feature folders and provider/state patterns before adding new structure.
-- Keep persistence local-first unless the issue explicitly requires cloud sync.
-- Route new user-facing copy through the project localization/copy system.
-- Keep sensitive claims conservative and evidence-backed.
-- Keep monetization entitlement-driven.
-- Avoid broad refactors unless the issue explicitly calls for them.
-- Never force-push a shared branch or bypass required CI checks.
+Release assessment checks evidence and gates; it does not authorize publication/deployment. Preserve configured producer/verifier/protected-execution authorities, physical human ACCEPT, consume-before-sign, replay/policy gates, and disabled approval controls.
 
-## Verification Ladder
+## Fictional example and handoff
 
-Use the narrowest verification that proves the issue, then broaden only when shared contracts are touched. These are the same commands `.github/workflows/ci.yml` runs on the PR.
+Trail Log issue #12 preserves packed flags after restart. Use feature/12-restart-persistence from main; verify restart, empty-list, failed-save, and retry behavior. Acceptance remains PENDING until actually checked. See the [walkthrough](examples/trail-log.md#workflowmd-example).
 
-Default full check:
-
-```sh
-cd <app_folder>
-<analyze/lint command>
-<test command>
-```
-
-Localization check after copy source edits:
-
-```sh
-cd <app_folder>
-<localization generation command>
-<analyze/lint command>
-```
-
-Database or generated-code check after schema/model edits:
-
-```sh
-cd <app_folder>
-<codegen or migration command>
-<test command>
-```
-
-Targeted test examples:
-
-```sh
-cd <app_folder>
-<targeted test command 1>
-<targeted test command 2>
-```
-
-## Review Standard
-
-A PR is review-ready only when:
-
-- Acceptance criteria are implemented.
-- The user-visible path is verified.
-- Data correctness is protected by tests where risk is non-trivial.
-- Copy/localization is updated when copy changes.
-- Product claims remain conservative.
-- CI is green (`lint`, `test`, `build`).
-- The PR description makes it obvious how a human should verify the result and links the issue with `Closes #<issue-number>`.
-
-## Handoff Format
-
-End every run with:
-
-```text
-Insight:
-Decision:
-Execution:
-Verification:
-Risk / next:
-```
+A handoff records dated scope/actual changes, environment, artifacts/repo/branch/commit, worktree state, decisions, actual checks/results, open physical/external evidence, one next success criterion, and a self-contained resume prompt. Use [PROJECT_STATE.md](PROJECT_STATE.md) when saving is authorized.

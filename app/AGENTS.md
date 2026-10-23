@@ -9,6 +9,10 @@ This file orients coding agents working in the main `<Project Name>` application
 
 For product policy, follow the root `../AGENTS.md` first. This nested guide wins only for exact code placement, commands, generated files, and app-specific workflow.
 
+Use the canonical [shortcuts](../SHORTCUTS.md), [naming policy](../CHAT_NAMING.md), [project state](../PROJECT_STATE.md), and [development ownership](../docs/delivery/development-team.md). Do not duplicate them here. If this file moves deeper than one directory below the root, repair these relative links.
+
+The Flutter-style layout below is illustrative, not an instruction to restructure another stack. [Trail Log](../examples/trail-log.md) shows a fictional app example.
+
 ## Project Summary
 
 `<Project Name>` is `<specific category>` for `<target user>`.
@@ -93,7 +97,7 @@ Release asset commands, if needed:
 
 - `<icon/splash/build command>`
 
-These are the same commands `.github/workflows/ci.yml` runs on every pull request.
+After configuration, keep these commands aligned with the active CI workflow. The template ships an opt-in `.github/workflows/ci.yml.example`; do not claim it runs before configuration.
 
 ## Generated Files
 

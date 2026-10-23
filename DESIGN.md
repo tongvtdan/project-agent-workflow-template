@@ -108,6 +108,8 @@ components:
 
 # <Project Name> Design System
 
+See [Trail Log's design example](examples/trail-log.md#designmd-example) for concrete fictional tokens, checklist states, and failure copy. Adapt them to the actual product and verify contrast/accessibility; sample values are not validated design decisions.
+
 ## Purpose
 
 This file is the visual and interaction contract for `<Project Name>`. AI agents should read it before generating screens, components, marketing surfaces, onboarding flows, paywalls, reports, dashboards, or share/export artifacts.

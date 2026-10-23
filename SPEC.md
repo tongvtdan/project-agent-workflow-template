@@ -1,5 +1,7 @@
 # <Project Name> SPEC
 
+For a filled-in fictional slice, see [Trail Log](examples/trail-log.md#specmd-example). Example facts are not live backlog or verified evidence. [WORKFLOW.md](WORKFLOW.md) owns tracker/review rules, [SHORTCUTS.md](SHORTCUTS.md) owns operation permissions, and [PROJECT_STATE.md](PROJECT_STATE.md) records current evidence.
+
 ## Insight
 
 The issue tracker should not become storage for vague app ideas. Every issue should map to a measurable product loop: activation, retention, revenue, trust, or distribution.
@@ -34,8 +36,10 @@ Recommended GitHub Project:
 Project URL:
 
 ```text
-https://github.com/orgs/<org>/projects/<number>
+https://github.com/users/<owner>/projects/<number>
 ```
+
+For an organization, use `https://github.com/orgs/<owner>/projects/<number>` instead. Record the actual verified URL.
 
 Repo:
 
@@ -88,7 +92,7 @@ Recommended GitHub labels (create once in repo settings or via `gh label create`
 
 ## Issue Template
 
-The canonical issue body lives in `.github/ISSUE_TEMPLATE/feature_request.md` so it renders as a GitHub issue form. Its structure:
+The canonical issue body lives in [.github/ISSUE_TEMPLATE/feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md), a Markdown issue template. Its structure:
 
 ```markdown
 ## Outcome
@@ -99,6 +103,10 @@ What user or business behavior changes?
 
 - In:
 - Out:
+
+## Sources And Ownership
+
+Current source files/contracts, owner, current writer, and required reviewers.
 
 ## Product Rule
 
@@ -112,6 +120,7 @@ Likely files, providers, DAOs, routes, localization, APIs, migrations, or device
 
 - [ ] User-visible behavior works
 - [ ] Edge or empty state handled
+- [ ] Realistic failure path preserves data and exposes an actionable error
 - [ ] Copy/localization updated if needed
 - [ ] Tests added or updated where risk is non-trivial
 - [ ] Analyze/lint passes
@@ -245,11 +254,11 @@ stateDiagram-v2
     Done --> [*]
 ```
 
-Do not close an issue unless the acceptance criteria are satisfied or the remaining gap is written directly in the issue or PR.
+Do not close an issue as completed until acceptance criteria are satisfied and evidence is recorded. Writing down a gap does not satisfy it. Canceled or duplicate issues require an explicit reason and any replacement link.
 
-For autonomous agent runs:
+For authorized implementation runs, follow WORKFLOW.md. Read-only aliases do not mutate issues, boards, or PRs. When tracker/PR publication is authorized:
 
-- move `Backlog` or `Ready` issues to `status:in-progress` and open a draft PR before editing further
+- move the selected issue to the configured In Progress state and open a draft PR when a first reviewable change is available
 - leave completed implementation work as an open PR in `status:in-review`, not merged
 - add a PR comment containing what changed, verification commands, pass/fail result, and next risk
 - do not merge sensitive data, entitlement, payment, notification, migration, hardware, or AI-decision work directly; require human review
@@ -283,6 +292,7 @@ An issue is ready when it has:
 - test expectation
 - activation, retention, revenue, trust, or distribution rationale
 - the `status:ready` label
+- normal, boundary, and failure acceptance with required evidence and owner
 
 ## Definition Of Done
 
@@ -293,9 +303,11 @@ An issue is done when:
 - empty and error states are handled
 - copy/localization is updated if needed
 - analytics events are added or consciously deferred
-- CI (`.github/workflows/ci.yml`) passes on the PR
+- configured required CI checks pass on the PR (starter job: `lint-test-build`)
 - at least one review approval is recorded (unless solo-merge is explicitly allowed)
-- the PR is merged and the issue is closed via `Closes #<number>`
+- the PR is merged to the default branch and the issue is closed via a closing keyword, or the work is explicitly accepted under project policy
+
+Evidence uses VERIFIED, REPORTED, ESTIMATED, HYPOTHESIS, or UNKNOWN/PENDING; acceptance uses PASS, FAIL, or PENDING. See PROJECT_STATE.md. Tests alone do not prove physical validation, paid demand, or release approval.
 
 ## Release Gate
 

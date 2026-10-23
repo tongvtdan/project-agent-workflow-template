@@ -3,250 +3,99 @@ description: Root operating guide for agents working in the <Project Name> works
 alwaysApply: true
 ---
 
-# AGENTS.md
+# Project operating contract
 
-This workspace contains the implementation and execution docs for `<Project Name>`.
+Resolve this template's placeholders before implementation. [Trail Log](examples/trail-log.md) is a fictional example, never an instruction to configure or rename a live project.
 
-## Operating Model
+## Operating model and project memory
 
-Act as three roles at once:
+Balance product outcome, engineering simplicity, and growth. Prefer the smallest reliable slice that improves activation, retention, or revenue; explain how trust and distribution support those outcomes. Challenge scope without a clear product reason.
 
-- Product Manager: challenge scope unless it improves activation, retention, revenue, trust, or distribution.
-- Engineer: ship the smallest reliable implementation that fits the current codebase.
-- Growth Operator: keep the product loop, monetization moment, and distribution artifact visible.
+Default response: a concise title, insight, decision, execution, actual verification, and one next action. Scale ceremony to the task.
 
-Default response shape for meaningful work:
+| Field | Value |
+| --- | --- |
+| Product/public promise | <Project Name>: <specific user outcome> |
+| Public name/internal codename | <Public Product Name> / <Internal Codename or same> |
+| Implementation root and stack | <app_folder>/; <actual framework/runtime versions> |
+| Ship path | <first input> → <first value> → <repeat use> → <paid/distribution moment> |
+| Non-goals | <explicit exclusions and reopening condition> |
+| Repository/board | <owner>/<repo>; <verified project URL> |
+| Naming and current task | [PROJECT_STATE.md](PROJECT_STATE.md) |
 
-1. Insight: what matters.
-2. Decision: what we should do.
-3. Execution: code, steps, architecture, or issue-ready tasks.
+Fictional example: Trail Log helps hikers save a packing list offline. The current slice preserves packed flags across restart; accounts and sync are excluded. The example assigns no prefix to a real project.
 
-## Local Project Memory
+## Required sources
 
-- Product/project: `<Project Name>`
-- Internal codename: `<Codename or same as product>`
-- Main implementation root: `<app_folder>/`
-- Issue tracker: GitHub Issues, repo `<org>/<repo>`
-- Project board: `https://github.com/orgs/<org>/projects/<number>` (or `https://github.com/<org>/<repo>/projects/<number>`)
-- Active spec: `SPEC.md`
-- Workflow: `WORKFLOW.md`
+Before substantial work read this contract, the nearest scoped AGENTS.md, [the guardrails](karpathy-guidelines/SKILL.md), [WORKFLOW.md](WORKFLOW.md), relevant [SPEC.md](SPEC.md) sections, and [project state](PROJECT_STATE.md). Read [DESIGN.md](DESIGN.md) for UI/copy work.
 
-## Mandatory Preflight Reading
+| Topic | Canonical owner |
+| --- | --- |
+| Product, architecture boundaries, actual commands | Root/scoped AGENTS.md |
+| Aliases, MODE perspectives, operation permissions | [SHORTCUTS.md](SHORTCUTS.md) |
+| Chat-title policy | [CHAT_NAMING.md](CHAT_NAMING.md) |
+| Confirmed identity/prefix, assignments, task/evidence | [PROJECT_STATE.md](PROJECT_STATE.md) |
+| Request structure and examples | [Request library](docs/delivery/reusable-requests.md) |
+| Ownership transfer and review | [Development guide](docs/delivery/development-team.md) |
+| Issue, PR, CI, review, and release gates | [WORKFLOW.md](WORKFLOW.md) |
+| Fictional filled-in walkthrough | [Trail Log](examples/trail-log.md) |
 
-Before taking any implementation, debugging, review, refactor, documentation, or state-changing tool action, read these project-local instructions first:
+Tool adapters link to these sources. Flag conflicting contracts; never silently rewrite one. Scoped guides refine local placement and commands without weakening root security/release gates. Explicit user scope and applicable project contracts govern.
 
-1. `karpathy-guidelines/SKILL.md` — behavioral guardrails for simple, surgical, verified work.
-2. `WORKFLOW.md` — mandatory GitHub issue/project loop and verification contract.
+## Task and evidence contract
 
-If the task is ambiguous, broad, or review/refactor-heavy, also read any directly relevant files referenced from `karpathy-guidelines/`, especially `karpathy-guidelines/references/examples.md`.
+Establish outcome, current sources, allowed/excluded changes, owner/writer, acceptance including realistic failure cases, required evidence, review, and constraints. A small edit needs a short response, not a planning document.
 
-## Product Truth
+Read-only requests permit inspection and safe diagnostics. Build/Fix permit the stated changes. "Review then update" includes the explicitly requested edits. Follow SHORTCUTS.md for full permissions; no alias/MODE grants external writes, publication, messages, spending, or delegation by itself.
 
-`<Project Name>` is not `<weak generic category>`. It is `<specific product category>` for `<specific user>` who needs `<high-value outcome>`.
+Preserve existing PRODUCT, ARCHITECTURE, PATENT, TRIZ, GROWTH, PRETOTYPE, CRITIC, and SYNTHESIS meanings and allow stacking. Default to SYNTHESIS only when no project/task mode is set.
 
-Core promise:
+Label claims VERIFIED, REPORTED, ESTIMATED, HYPOTHESIS, or UNKNOWN/PENDING. Acceptance is PASS, FAIL, or PENDING. Record actual commands/results and relevant versions. A build alone does not prove behavior or real-world readiness.
 
-```text
-<Short public product promise>
-```
+## Naming and shortcuts
 
-Current product pillars:
+Follow CHAT_NAMING.md and the confirmed identity/assignments in PROJECT_STATE.md. Format: `<PREFIX>-<PLATFORM>-<NN> | <Task or Subsystem>`; X = Codex, C = ChatGPT Chat, W = ChatGPT Work. Each project keeps one cross-platform counter.
 
-- `<Pillar 1>`: `<job, user outcome, business outcome>`.
-- `<Pillar 2>`: `<job, user outcome, business outcome>`.
-- `<Pillar 3>`: `<job, user outcome, business outcome>`.
+Never infer a prefix or reuse assigned numbers. Preserve valid existing titles/numbers. Inspect available inventories, archives, linked platforms, and recorded assignments; recheck concurrency and verify the native saved title. If tooling/identity/safe numbering cannot be verified, continue substantive work silently. Naming never grants creating, messaging, moving, or bulk-renaming tasks.
 
-Important naming rule:
+Honor aliases case-insensitively. /Review audits; /Fix requests a scoped correction; /Test runs existing checks; /Addtests requests tests. Chat aliases and application keyboard shortcuts are separate.
 
-- Use `<Public Product Name>` for public-facing UI, store, support, marketing, and customer language.
-- Use `<Internal Codename>` only for codebase, old docs, skills, or architecture context.
+## Architecture and ownership
 
-Removed or explicitly deferred concepts:
+Fill these boundaries using the actual codebase. Do not reorganize code to match an example map.
 
-- Do not build `<deferred feature>` until `<validation or milestone>`.
+| Boundary | Contract to fill |
+| --- | --- |
+| UI/navigation | <owning paths and existing patterns> |
+| State/domain | <owner, invariants, pure logic boundaries> |
+| Persistence/migrations | <source schema, storage API, migration rules> |
+| Client/server | <offline requirements and explicit network/auth boundaries> |
+| Design/copy | <tokens, localization, accessibility> |
+| Exports/devices/AI decisions | <input/output contract and conservative failure states> |
+| Generated files | <sources, commands, files not to edit> |
 
-## Current Strategic Priority
+Preserve user changes. Follow nearby code and existing dependencies. Explain a new dependency's necessity and maintenance cost; retain project approval requirements. Keep local-first behavior unless the task requires otherwise. Missing/ambiguous critical inputs remain unknown/pending rather than falsely successful.
 
-The next product work should shorten time to value:
+Keep one writer at a time on shared artifacts. Use only necessary reviewers and label same-agent self-review honestly. Follow the development guide for ownership transfer.
 
-```text
-<first action>
-  -> <first data/value moment>
-  -> <first proof or saved outcome>
-  -> <repeat loop>
-  -> <paid/viral/deeper value moment>
-```
+## Commands and verification
 
-Prefer changes that make the first session answer:
+Run app commands from <app_folder>/. Replace these with actual runnable commands:
 
-```text
-<What should the user understand or accomplish immediately?>
-```
+- Install: <install command>.
+- Analyze/lint: <analyze/lint command>.
+- Targeted test: <test command>.
+- Run/build: <run command> / <build command>.
+- Generation/migration/localization: <commands or not applicable>.
 
-## Repo Map
+The opt-in CI starter is .github/workflows/ci.yml.example. Configure before renaming to ci.yml; the starter check is lint-test-build. Keep required checks in WORKFLOW.md aligned with actual jobs.
 
-Top-level files:
+For docs check links, examples, permission consistency, and diff whitespace. For code verify the user-visible path and closest meaningful regression checks. Expand checks when shared contracts change. Persistence, migrations, sync, entitlements, notifications, BLE/hardware, exports, routing, and user-affecting AI outputs need risk-appropriate evidence.
 
-- `README.md`: `<broad project overview>`.
-- `DESIGN.md`: AI-readable design system and product experience source of truth.
-- `SPEC.md`: execution spec and GitHub issue hierarchy.
-- `WORKFLOW.md`: GitHub Issues/PR-driven implementation workflow.
-- `karpathy-guidelines/`: behavioral guardrails skill (simplicity, surgical diffs, verified completion).
-- `<app_folder>/`: main application.
-- `.github/`: issue templates, PR template, and CI workflows.
+Never weaken CI, branch protection, human review, or protected-execution controls. Sensitive data, entitlements, payments, notifications, migrations, hardware, or user-affecting AI decisions require human review. Software tests do not establish hardware qualification, clinical validation, paid demand, or qualified human security sign-off.
 
-Main app areas:
+## Completion and handoff
 
-- `<app_folder>/lib/app/`: app bootstrap, routing, dependency wiring.
-- `<app_folder>/lib/core/`: shared infrastructure, database, metrics, theme, services.
-- `<app_folder>/lib/domain/`: cross-feature domain rules.
-- `<app_folder>/lib/features/`: feature-first UI and application logic.
-- `<app_folder>/test/`: focused regression and domain tests.
+Report outcome, changed artifacts, acceptance PASS/FAIL/PENDING, actual evidence, open risks, and one next action. Save durable state only when authorized, using PROJECT_STATE.md rather than parallel logs.
 
-Adjust this map to the real repo once code exists.
-
-## Engineering Rules
-
-- Preserve local-first behavior unless cloud sync is explicitly required.
-- Prefer existing project patterns over new abstractions.
-- Prefer feature-local changes over broad architecture rewrites.
-- Keep sensitive claims conservative and evidence-backed.
-- Keep user-facing copy routed through the project localization/copy system.
-- Do not add heavy dependencies unless they unlock a required capability.
-- Do not build `<non-goal 1>`, `<non-goal 2>`, or `<non-goal 3>` on the MVP path.
-- Do not merge to `main` without an open PR referencing its issue and passing CI.
-
-## AI Tooling Pattern
-
-This repo follows the same agent pattern as the portfolio projects:
-
-- `AGENTS.md`: primary project contract for all agents.
-- `CLAUDE.md`: Claude-specific orientation that points back to this contract.
-- `CODEX.md`: Codex-specific orientation and guardrails.
-- `DESIGN.md`: visual system, components, interaction rules, product experience, and trust boundaries.
-- `SPEC.md`: issue-ready execution planning.
-- `WORKFLOW.md`: GitHub Issues/PR-driven implementation workflow.
-- `karpathy-guidelines/`: behavioral guardrails skill, read before non-trivial work.
-- `.github/`: issue templates, PR template, CI workflow.
-
-When these files disagree, prefer `AGENTS.md` for product and execution policy, and prefer nested guides for exact code placement.
-
-## Commands
-
-Run app commands from `<app_folder>/`.
-
-Core:
-
-```sh
-<install command>
-<analyze/lint command>
-<test command>
-<run command>
-```
-
-Generated code, if used:
-
-```sh
-<codegen command>
-<localization command>
-```
-
-GitHub CLI, for issue and PR work:
-
-```sh
-gh issue view <number>
-gh issue develop <number> --checkout
-gh pr create --fill
-gh pr checks
-```
-
-When changing user-facing copy:
-
-- update all required localization/source copy files
-- regenerate generated localization if applicable
-- avoid hardcoded strings where localization is expected
-
-When changing persisted data:
-
-- edit source schema/model files
-- generate migrations or codegen
-- add or update tests around persistence behavior
-
-## Design And Spec Workflow
-
-Use `DESIGN.md` for visual system, component behavior, interaction rules, product experience, and trust boundaries.
-
-Use `SPEC.md` for execution planning and GitHub issue synchronization:
-
-- one GitHub Project maps to the active release or initiative
-- one Epic label maps to a major product loop or risk area
-- one Issue maps to a shippable slice
-- every issue should name its activation, retention, revenue, trust, or distribution outcome
-
-Before implementing a meaningful feature, check whether it affects:
-
-- first-session activation
-- recurring retention loop
-- paid conversion moment
-- data correctness or trust
-- notification/re-engagement behavior
-- privacy, safety, or localization
-- distribution or share artifact
-
-## Test Expectations
-
-For docs-only changes, no test run is required.
-
-For app changes, run at minimum:
-
-```sh
-<analyze/lint command>
-<test command>
-```
-
-These same commands run in `.github/workflows/ci.yml` on every PR; a PR should not be marked ready for review with failing CI.
-
-If the change touches a narrow logic surface, add or update the closest test instead of creating broad test infrastructure.
-
-High-risk areas that need tests:
-
-- onboarding and routing redirects
-- persisted data, migrations, and sync
-- subscription and entitlement gates
-- notification scheduling
-- generated reports, exports, or proof artifacts
-- hardware/BLE state machines
-- AI output transformations that affect user decisions
-
-## Challenge Mode
-
-Push back when a task increases scope without strengthening the loop.
-
-Good next work usually looks like:
-
-- faster activation
-- trusted core loop math
-- reliable data capture
-- monetization after demonstrated value
-- share/export/distribution artifact
-- release-blocking quality gates
-
-Weak next work usually looks like:
-
-- dashboards before the first aha moment works
-- advanced AI before deterministic rules are trustworthy
-- social features before share artifacts are proven
-- backend sync before local retention is validated
-- settings and preferences before the primary workflow is useful
-
-## Handoff Format
-
-For meaningful work, end with:
-
-```text
-Insight:
-Decision:
-Execution:
-Verification:
-Risk / next:
-```
+A handoff includes date/timezone, project/environment, authorized scope/actual changes, artifact/repo/branch/commit links, worktree state, decisions, checks/results, pending physical/external evidence, next success criterion, and a self-contained resume prompt. Exclude secrets, raw patient/sensor data, and unrelated private details.
