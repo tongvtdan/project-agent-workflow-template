@@ -1,39 +1,51 @@
-# Karpathy Guidelines Examples
+# Guardrail examples using a fictional project
 
-These examples describe the project-wide anti-patterns this skill is meant to prevent. Replace the placeholder scenarios with real ones from `<Project Name>` once a few real incidents or review comments exist.
+Trail Log is a fictional offline packing-checklist app. These examples illustrate decisions, not implemented features or actual verification.
 
-## Hidden Assumptions
+## Hidden assumptions
 
-Weak response: implement `<a change>` without checking whether it affects `<related case A>`, `<related case B>`, or `<related case C>`.
+Weak approach: change list persistence without checking empty lists, corrupt saved data, or interrupted saves.
 
-Better response: trace the change through all branches of `<the affected function>`, state which cases are covered, and flag any edge case that could flip the result silently.
+Better approach: trace save/load and define expected behavior for each failure case before editing. Preserve the last saved list on a failed write; label unchecked cases PENDING.
 
-## Over-Abstraction
+## Unnecessary abstraction
 
-Weak response: build a generic `<strategy/plugin/registry>` system to handle different `<input formats/variants>`.
+Weak approach: add a plugin registry for future checklist formats when only plain checklist items exist.
 
-Better response: add a branch inside `<the existing function>` for the specific case that needs handling. Extract only when three or more distinct real cases exist and the duplication becomes the actual problem.
+Better approach: keep the existing small repository interface. Add a new abstraction only when actual callers and complexity justify it; no arbitrary count of examples automatically warrants one.
 
-## Drive-By Refactoring
+## Unrelated refactoring
 
-Weak response: fix `<a specific bug>` while also renaming unrelated variables, reformatting the file, and reorganizing nearby components.
+Weak approach: fix packed flags while renaming unrelated widgets and reorganizing feature folders.
 
-Better response: change only the lines needed to fix `<the specific bug>`, verify the fix, and leave all adjacent code intact. Note the unrelated cleanup opportunity in the handoff instead of doing it.
+Better approach: change save/load mapping and its direct caller, verify restart behavior, and report unrelated cleanup separately.
 
-## Verifiable Goals
+## Verifiable goals
 
-Weak response: "improve `<quality area>`" or "make `<feature>` more reliable" without a measurable path.
+Weak approach: "make saving more reliable."
 
-Better response: define the observable result (e.g., "`<concrete, measurable acceptance criterion>`"), run the closest check, and stop when that criterion is met.
+Better approach: "a two-item list keeps packed flags after restart; a failed save retains the last saved list and exposes Retry." Record actual reproduction and check results before claiming PASS.
 
-## Crossing Architectural Boundaries
+## Architectural boundaries
 
-Weak response: move state into a new store/context/provider, or add a network call, when the user asks for `<a feature that sounds like it needs one>`.
+Weak approach: add mandatory cloud login because local save failed.
 
-Better response: keep state and persistence within the documented architectural boundaries (see `AGENTS.md`). Confirm the boundary is intentional before proposing anything that crosses it.
+Better approach: keep the offline workflow and investigate the owning persistence path. A new sync/auth boundary needs its own scoped decision and authority.
 
-## Unsafe Correctness Defaults
+## Conservative status
 
-Weak response: return the optimistic result (`<e.g. OK, valid, approved>`) when required inputs are missing or ambiguous, because "nothing has explicitly failed."
+Weak approach: show "Saved" immediately even if persistence has failed.
 
-Better response: return the conservative result (`<e.g. OPEN, unknown, blocked>`) whenever the outcome cannot be determined. A false positive on a trust-critical output protects the person relying on the report.
+Better approach: distinguish saving, saved, and failed-save states, preserve edits, and let the user retry. Unknown success remains unknown.
+
+## Instruction drift
+
+Weak approach: duplicate all shortcut/naming rules in CODEX.md and CLAUDE.md and later update only one.
+
+Better approach: link both adapters to SHORTCUTS.md, CHAT_NAMING.md, and PROJECT_STATE.md. Read current files before concluding that an older adapter describes the actual architecture.
+
+## Evidence honesty
+
+Weak approach: copy a sample flutter test command and report it passed.
+
+Better approach: run only configured commands against real files, record the output, and report unperformed checks as PENDING. The fictional walkthrough is not test evidence.
