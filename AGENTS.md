@@ -15,12 +15,12 @@ Default response: a concise title, insight, decision, execution, actual verifica
 
 | Field | Value |
 | --- | --- |
-| Product/public promise | <Project Name>: <specific user outcome> |
-| Public name/internal codename | <Public Product Name> / <Internal Codename or same> |
-| Implementation root and stack | <app_folder>/; <actual framework/runtime versions> |
-| Ship path | <first input> → <first value> → <repeat use> → <paid/distribution moment> |
-| Non-goals | <explicit exclusions and reopening condition> |
-| Repository/board | <owner>/<repo>; <verified project URL> |
+| Product/public promise | `<Project Name>`: `<specific user outcome>` |
+| Public name/internal codename | `<Public Product Name>` / `<Internal Codename or same>` |
+| Implementation root and stack | `<app_folder>/`; `<actual framework/runtime versions>` |
+| Ship path | `<first input>` → `<first value>` → `<repeat use>` → `<paid/distribution moment>` |
+| Non-goals | `<explicit exclusions and reopening condition>` |
+| Repository/board | `<owner>/<repo>`; `<verified project URL>` |
 | Naming and current task | [PROJECT_STATE.md](PROJECT_STATE.md) |
 
 Fictional example: Trail Log helps hikers save a packing list offline. The current slice preserves packed flags across restart; accounts and sync are excluded. The example assigns no prefix to a real project.
@@ -66,13 +66,13 @@ Fill these boundaries using the actual codebase. Do not reorganize code to match
 
 | Boundary | Contract to fill |
 | --- | --- |
-| UI/navigation | <owning paths and existing patterns> |
-| State/domain | <owner, invariants, pure logic boundaries> |
-| Persistence/migrations | <source schema, storage API, migration rules> |
-| Client/server | <offline requirements and explicit network/auth boundaries> |
-| Design/copy | <tokens, localization, accessibility> |
-| Exports/devices/AI decisions | <input/output contract and conservative failure states> |
-| Generated files | <sources, commands, files not to edit> |
+| UI/navigation | `<owning paths and existing patterns>` |
+| State/domain | `<owner, invariants, pure logic boundaries>` |
+| Persistence/migrations | `<source schema, storage API, migration rules>` |
+| Client/server | `<offline requirements and explicit network/auth boundaries>` |
+| Design/copy | `<tokens, localization, accessibility>` |
+| Exports/devices/AI decisions | `<input/output contract and conservative failure states>` |
+| Generated files | `<sources, commands, files not to edit>` |
 
 Preserve user changes. Follow nearby code and existing dependencies. Explain a new dependency's necessity and maintenance cost; retain project approval requirements. Keep local-first behavior unless the task requires otherwise. Missing/ambiguous critical inputs remain unknown/pending rather than falsely successful.
 
@@ -80,13 +80,13 @@ Keep one writer at a time on shared artifacts. Use only necessary reviewers and 
 
 ## Commands and verification
 
-Run app commands from <app_folder>/. Replace these with actual runnable commands:
+Run app commands from `<app_folder>/`. Replace these with actual runnable commands:
 
-- Install: <install command>.
-- Analyze/lint: <analyze/lint command>.
-- Targeted test: <test command>.
-- Run/build: <run command> / <build command>.
-- Generation/migration/localization: <commands or not applicable>.
+- Install: `<install command>`.
+- Analyze/lint: `<analyze/lint command>`.
+- Targeted test: `<test command>`.
+- Run/build: `<run command>` / `<build command>`.
+- Generation/migration/localization: `<commands or not applicable>`.
 
 The opt-in CI starter is .github/workflows/ci.yml.example. Configure before renaming to ci.yml; the starter check is lint-test-build. Keep required checks in WORKFLOW.md aligned with actual jobs.
 

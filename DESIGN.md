@@ -106,7 +106,7 @@ components:
     padding: 10px 12px
 ---
 
-# <Project Name> Design System
+# `<Project Name>` Design System
 
 See [Trail Log's design example](examples/trail-log.md#designmd-example) for concrete fictional tokens, checklist states, and failure copy. Adapt them to the actual product and verify contrast/accessibility; sample values are not validated design decisions.
 

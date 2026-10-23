@@ -1,4 +1,4 @@
-# <Project Name> SPEC
+# `<Project Name>` SPEC
 
 For a filled-in fictional slice, see [Trail Log](examples/trail-log.md#specmd-example). Example facts are not live backlog or verified evidence. [WORKFLOW.md](WORKFLOW.md) owns tracker/review rules, [SHORTCUTS.md](SHORTCUTS.md) owns operation permissions, and [PROJECT_STATE.md](PROJECT_STATE.md) records current evidence.
 
@@ -74,7 +74,7 @@ Project success metrics:
 
 ### Labels
 
-Recommended GitHub labels (create once in repo settings or via `gh label create`):
+Recommended category/priority labels (create once in repo settings or via `gh label create`). The `status:*` labels below are optional: create/use them only when WORKFLOW.md selects labels as the status authority or explicitly configures synchronization.
 
 - `activation`
 - `retention`
@@ -231,7 +231,7 @@ Acceptance:
 
 ## Status Rules
 
-Use simple statuses, tracked as labels or GitHub Project board columns:
+Use the single status authority configured in WORKFLOW.md and recorded in PROJECT_STATE.md: either the board Status field or status labels. Label names in parentheses below apply only to a configured label workflow; board-only projects do not require them.
 
 - Backlog: not selected for current sprint
 - Ready: clear scope and acceptance criteria (`status:ready`)
@@ -244,8 +244,8 @@ Use simple statuses, tracked as labels or GitHub Project board columns:
 stateDiagram-v2
     [*] --> Backlog
     Backlog --> Ready: scope + acceptance criteria written
-    Ready --> InProgress: branch created, status:in-progress
-    InProgress --> InReview: PR opened, status:in-review
+    Ready --> InProgress: branch created, configured state updated
+    InProgress --> InReview: evidence ready for review, configured state updated
     InReview --> InProgress: changes requested
     InReview --> Done: PR approved + merged
     Backlog --> Parked: intentionally deferred
@@ -259,7 +259,7 @@ Do not close an issue as completed until acceptance criteria are satisfied and e
 For authorized implementation runs, follow WORKFLOW.md. Read-only aliases do not mutate issues, boards, or PRs. When tracker/PR publication is authorized:
 
 - move the selected issue to the configured In Progress state and open a draft PR when a first reviewable change is available
-- leave completed implementation work as an open PR in `status:in-review`, not merged
+- leave completed implementation work as an open PR with the issue's configured In Review state, not merged
 - add a PR comment containing what changed, verification commands, pass/fail result, and next risk
 - do not merge sensitive data, entitlement, payment, notification, migration, hardware, or AI-decision work directly; require human review
 
@@ -291,7 +291,7 @@ An issue is ready when it has:
 - likely file areas
 - test expectation
 - activation, retention, revenue, trust, or distribution rationale
-- the `status:ready` label
+- the configured Ready state (board Status or `status:ready` label, as selected in WORKFLOW.md)
 - normal, boundary, and failure acceptance with required evidence and owner
 
 ## Definition Of Done

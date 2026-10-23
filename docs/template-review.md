@@ -30,3 +30,18 @@ Application commands and sample outcomes must remain explicitly fictional until 
 VERIFIED on 2026-10-23: a local Python standard-library scan checked 20 Markdown files, 84 relative links/anchors, all 18 aliases, required paths, fenced-block balance, trailing whitespace, starter CI job consistency, and accidental private-project identifiers. It exited 0 after correcting one example anchor. git diff --check also exited 0.
 
 Same-agent self-review assessed the naming and operation scenarios above. No independent reviewer, application build/test run, physical validation, paid-demand validation, or release approval is claimed. The template has no sample application to execute.
+
+## Post-merge review
+
+The follow-up review found and corrected four adoption defects:
+
+- P2: Unescaped angle-bracket placeholders in Markdown tables, headings, and prose could render as HTML and disappear. Code spans now preserve them, including project identity, commands, state fields, and sample URLs.
+- P2: CI setup ambiguously referred to an enabled field. Instructions now identify `ci.enabled` in WORKFLOW.md as documentation only and explicitly exclude an `enabled` key in GitHub Actions YAML.
+- P2: SPEC.md still required status labels after allowing board-only tracking. Ready/review states now use the configured single authority, and PROJECT_STATE.md records it.
+- P2: Chat numbers were reserved only after renaming, leaving a race between sessions. Exclusive writer ownership and a recorded reservation now precede the native rename; unavailable ownership skips allocation and failed attempts keep their reservation.
+
+VERIFIED: GitHub's GFM renderer returned visible literal project, outcome, path, and task placeholders from the corrected AGENTS.md and PROJECT_STATE.md. Local checks cover links, aliases, whitespace, unescaped prose placeholders, single-authority status rules, and reservation ordering. This follow-up remains same-agent review; application execution and independent review are not claimed.
+
+## Merge validation
+
+The template now includes a standard-library Python validator and a read-only GitHub Actions workflow. The validator checks required paths, relative links/anchors, visible placeholders, whitespace, and CI starter references while accepting intentional configured placeholders in code spans. README.md documents the local command and how to remove/adapt template-maintenance checks when starting a real product.
