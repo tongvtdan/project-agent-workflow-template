@@ -41,3 +41,7 @@ The follow-up review found and corrected four adoption defects:
 - P2: Chat numbers were reserved only after renaming, leaving a race between sessions. Exclusive writer ownership and a recorded reservation now precede the native rename; unavailable ownership skips allocation and failed attempts keep their reservation.
 
 VERIFIED: GitHub's GFM renderer returned visible literal project, outcome, path, and task placeholders from the corrected AGENTS.md and PROJECT_STATE.md. Local checks cover links, aliases, whitespace, unescaped prose placeholders, single-authority status rules, and reservation ordering. This follow-up remains same-agent review; application execution and independent review are not claimed.
+
+## Merge validation
+
+The template now includes a standard-library Python validator and a read-only GitHub Actions workflow. The validator checks required paths, relative links/anchors, visible placeholders, whitespace, and CI starter references while accepting intentional configured placeholders in code spans. README.md documents the local command and how to remove/adapt template-maintenance checks when starting a real product.

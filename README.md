@@ -83,3 +83,15 @@ git diff --check
 ```
 
 A placeholder scan helps setup; it is not a complete validation or evidence that the app works. Sample app commands are intentionally not runnable in this docs-only repository.
+
+## Validate the template
+
+Run the template-maintenance checks without installing dependencies:
+
+```sh
+python3 scripts/validate_template.py
+```
+
+The active `validate-template.yml` workflow runs this command for pull requests and pushes to main. It checks required template files, relative links/heading anchors, visible placeholders, whitespace, and CI starter references. The app CI starter remains opt-in.
+
+When adopting the kit for a product, remove or adapt this maintenance script and its workflow together before deleting template-only files. Configure the product's own app checks separately; template validation is not an application test.
