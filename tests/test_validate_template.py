@@ -163,6 +163,22 @@ class TemplateValidationTests(unittest.TestCase):
         self.append(self.root / "README.md", "\nLiteral example: `[Example](not-a-real-file.md)`\n")
         self.check()
 
+    def test_unmatched_backtick_does_not_hide_links_in_later_paragraphs(self):
+        self.append(self.root / "README.md", "\nUnmatched `.\n\n[Broken](missing.md)\n\nUse `command`.\n")
+        self.check("missing local link target")
+
+    def test_escaped_backtick_does_not_open_code_span(self):
+        self.append(self.root / "README.md", "\nLiteral \\` then [Broken](missing.md) and `command`.\n")
+        self.check("missing local link target")
+
+    def test_multiline_code_span_masks_literal_link(self):
+        self.append(self.root / "README.md", "\nExample: `first line\n[Literal](missing.md)`\n")
+        self.check()
+
+    def test_even_backslashes_do_not_escape_code_opener(self):
+        self.append(self.root / "README.md", "\nExample: \\\\`[Literal](missing.md)`\n")
+        self.check()
+
     def test_duplicate_task_id(self):
         text = self.tasks.read_text()
         block = text[text.index("## T1\n"):text.index("## T2\n")]

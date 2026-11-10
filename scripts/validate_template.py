@@ -27,7 +27,6 @@ LINK = re.compile(r"!?\[[^\]]*\]\((<[^>]+>|[^\s)]+)(?:\s+[\"'][^\n]*?[\"'])?\)")
 PLACEHOLDER = re.compile(r"<[^<>\n]+>")
 REQUIREMENT_LINK = re.compile(r"\[(R[1-9]\d*)\]\(([^)]+)\)")
 EVIDENCE_LINK = re.compile(r"\[(?:[^\]]+)\]\(activity\.md#(e[1-9]\d*)\)")
-INLINE_CODE = re.compile(r"(?<!`)(`+)(?!`)(.*?)(?<!`)\1(?!`)", re.S)
 TASK_FIELDS = (
     "Outcome", "Requirements", "Depends on", "Owner", "Scope", "Acceptance",
     "Check", "Verification state", "Evidence", "Issue",
@@ -36,7 +35,31 @@ EVIDENCE_FIELDS = ("Task", "Timestamp", "Candidate", "Environment", "Procedure",
 
 
 def without_inline_code(text):
-    return INLINE_CODE.sub(lambda match: re.sub(r"[^\n]", " ", match.group(0)), text)
+    parts = re.split(r"(\n[ \t]*\n)", text)
+    for part_index in range(0, len(parts), 2):
+        part = parts[part_index]
+        runs = list(re.finditer(r"`+", part))
+        masked = list(part)
+        index = 0
+        while index < len(runs):
+            opening = runs[index]
+            prefix = part[:opening.start()]
+            backslashes = len(prefix) - len(prefix.rstrip(chr(92)))
+            if backslashes % 2:
+                index += 1
+                continue
+            closing = next((j for j in range(index + 1, len(runs))
+                            if runs[j].group() == opening.group()), None)
+            if closing is None:
+                index += 1
+                continue
+            # Backslashes are literal inside code; only the opener can be escaped.
+            for position in range(opening.start(), runs[closing].end()):
+                if masked[position] != "\n":
+                    masked[position] = " "
+            index = closing + 1
+        parts[part_index] = "".join(masked)
+    return "".join(parts)
 
 
 def link_values(pattern, text, allow_images=False):
