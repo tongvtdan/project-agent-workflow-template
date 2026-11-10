@@ -4,6 +4,8 @@ Trail Log is an invented offline packing-checklist app for weekend hikers. Every
 
 Keep this reference separate from live project instructions. Copy the structure, then replace facts using the real project and owner confirmation.
 
+The complete [offline-save feature bundle](../docs/specs/trail-log-offline-save/requirements.md) connects [technical design](../docs/specs/trail-log-offline-save/design.md), [four dependent tasks](../docs/specs/trail-log-offline-save/tasks.md), and [activity](../docs/specs/trail-log-offline-save/activity.md). All app verification remains PENDING. [Proactive recipes](../docs/automation.md) are documentation only.
+
 ## Project setup example
 
 | Field | Fictional value |

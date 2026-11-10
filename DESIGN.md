@@ -116,6 +116,8 @@ This file is the visual and interaction contract for `<Project Name>`. AI agents
 
 `AGENTS.md` explains how to build the project. `DESIGN.md` explains how the product should look, feel, and communicate.
 
+This root file owns the visual/interaction system. A feature bundle's design.md owns its technical decisions and data flow; see [feature specifications](docs/specs/README.md). Link to this visual contract rather than copying it into each technical plan.
+
 ## Product Experience North Star
 
 `<Project Name>` helps `<target user>` achieve `<primary outcome>` through `<core mechanism>`.

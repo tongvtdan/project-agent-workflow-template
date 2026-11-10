@@ -45,3 +45,13 @@ The example paths and commands in [Trail Log](../../examples/trail-log.md) descr
 Use [PROJECT_STATE.md](../../PROJECT_STATE.md) for durable state when saving is authorized. A /Handoff request alone produces a response; it does not grant file edits or commits.
 
 A useful handoff states what was actually changed and checked, the exact remaining acceptance gap, and one next success criterion. Exclude secrets, raw patient/sensor data, and unrelated private project details.
+
+## Feature-bundle requests
+
+Example planning request: /Plan Trail Log offline save using requirements, technical design, task dependencies, and acceptance/failure checks. Save the bundle only when explicitly asked.
+
+Example implementation request: /Build the agreed offline-save slice; follow dependency-ready tasks, record actual attempts and checks, and return the review packet. Do not claim the fictional app exists in this template.
+
+Example review request: /QA compare the checked candidate with the requirement IDs and evidence, then report PASS/FAIL/PENDING and the decision needed. Keep required missing review PENDING.
+
+Use the [canonical feature format](../specs/README.md) and its [Trail Log example](../specs/trail-log-offline-save/tasks.md). Automation registration is outside these requests; see the [unregistered recipes](../automation.md).

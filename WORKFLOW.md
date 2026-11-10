@@ -52,12 +52,15 @@ A compound request such as "review then update the docs" authorizes the specifie
 
 1. Read the actual task and linked sources. Use an existing issue when available; create/update issues or board items only under established task authorization.
 2. Establish outcome, scope/non-goals, owner/writer, acceptance/failure cases, checks, and review. Challenge weak product rationale and recommend a smaller slice.
+   For substantial work follow [requirements → technical design → tasks](docs/specs/README.md); agree consequential decisions once, then continue routine authorized tasks without repeated permission requests.
 3. Set authorized task state to In Progress; record unavailable external state as PENDING without claiming a successful mutation.
 4. Inspect current files, Git state, and applicable scoped guides. Branch from main unless the actual configured base differs. Use `<type>/<issue-number>-<short-slug>`, or an owner-approved task slug when no issue exists.
 5. Implement one independently verifiable slice with one writer per shared artifact.
+   Select tasks whose dependencies have PASS evidence. Append actual attempts/decisions to the feature activity.md, then update task verification and the active PROJECT_STATE.md pointer when authorized. No task evidence is a second GitHub issue-status ledger.
 6. Run relevant checks; report PASS, FAIL, or PENDING for each acceptance criterion with actual evidence.
 7. When publishing is authorized, open/update a draft PR linked to the issue. In a submitted PR body use a real closing keyword such as Closes #12 without code formatting.
 8. After required checks, present the reviewable result and set the authorized state to In Review. Report changed artifacts, actual checks/results, unresolved findings, and next risk.
+   Return the [review packet](docs/specs/README.md#return-a-review-packet) in the PR or /QA response. Unavailable or errored required review is PENDING, never PASS.
 9. Do not self-merge without explicit owner solo-merge authority. Sensitive data, entitlements, payments, notifications, hardware, migrations, or user-affecting AI decisions require human review.
 
 ## Verification ladder
@@ -81,6 +84,8 @@ In Review means implementation awaits required review; open findings and evidenc
 PR closing keywords automatically close linked issues when merged into the default branch. For other targets, close only after required default-branch integration or an authorized manual decision.
 
 Release assessment checks evidence and gates; it does not authorize publication/deployment. Preserve configured producer/verifier/protected-execution authorities, physical human ACCEPT, consume-before-sign, replay/policy gates, and disabled approval controls.
+
+[Proactive work recipes](docs/automation.md) are unregistered documentation. The existing template-validation Action is a deterministic check, not an autonomous implementation/review bot. No recipe changes task state, starts a worker, posts comments, or grants merge authority.
 
 ## Fictional example and handoff
 

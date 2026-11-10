@@ -15,6 +15,16 @@ Replace ISSUE_NUMBER with a real issue number in plain text, for example `Closes
 
 Which of activation, retention, revenue, trust, or distribution this improves, and why now.
 
+## Review Packet
+
+- Requirements / task IDs and links: `<active bundle or small-fix issue>`
+- Checked candidate and changed artifacts: `<commit/version and diff>`
+- Acceptance: `<criterion → PASS/FAIL/PENDING → actual evidence link>`
+- Demonstration: `<steps and expected/observed result>`
+- Review / decision needed: `<required reviewer, pending evidence, or owner decision>`
+
+Use feature activity.md for detailed attempts; do not duplicate its history here. A passing structural check does not establish application behavior or human acceptance.
+
 ## Verification
 
 Commands run and their result:

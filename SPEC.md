@@ -23,6 +23,16 @@ Repo: <org>/<repo>
 
 Do not create issues larger than one independently verifiable product slice.
 
+## Feature spec index
+
+For substantial work, use the [feature specification contract](docs/specs/README.md). Requirements (or bugfix analysis) define accepted behavior, feature design.md defines the technical plan, tasks.md maps dependencies and checks, and activity.md records actual attempts.
+
+| Feature | Behavior | Technical design | Tasks and evidence |
+| --- | --- | --- | --- |
+| Trail Log offline save (fictional, not live backlog) | [Requirements](docs/specs/trail-log-offline-save/requirements.md) | [Design](docs/specs/trail-log-offline-save/design.md) | [Tasks](docs/specs/trail-log-offline-save/tasks.md), [activity](docs/specs/trail-log-offline-save/activity.md) |
+
+Replace the example row with real linked work when adopting this template. Keep accepted behavior in its bundle rather than copying it into this index. GitHub owns live issue status; task verification is separate from review/merge/release decisions.
+
 ## Sync Model
 
 ### Project

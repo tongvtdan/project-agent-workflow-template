@@ -45,3 +45,11 @@ VERIFIED: GitHub's GFM renderer returned visible literal project, outcome, path,
 ## Merge validation
 
 The template now includes a standard-library Python validator and a read-only GitHub Actions workflow. The validator checks required paths, relative links/anchors, visible placeholders, whitespace, and CI starter references while accepting intentional configured placeholders in code spans. README.md documents the local command and how to remove/adapt template-maintenance checks when starting a real product.
+
+## Feature-spec update: 2026-11-10
+
+Added a requirements/bugfix → technical design → dependency-ordered tasks → activity/evidence → review-packet contract, with a complete fictional Trail Log offline-save bundle. Root DESIGN.md retains visual-system ownership; GitHub retains issue status; PROJECT_STATE.md holds the active pointer.
+
+Proactive project-health and PR-watch recipes are DOCUMENTED ONLY and NOT CONFIGURED. No scheduler, bot, worker, or registration was created. The existing deterministic CI check now also runs validator regression tests.
+
+VERIFIED locally with Python 3.14.7: python3 scripts/validate_template.py passed on 26 Markdown documents, 146 local links/anchors, and one feature bundle; python3 -m unittest discover -s tests -v passed 29 tests; git diff --check passed. Tests cover valid feature/bugfix formats, broken links, requirement coverage, duplicate IDs, missing acceptance, cycles/unknown dependencies, and unsupported PASS evidence. This is same-agent self-review, not independent review or app verification. Trail Log application behavior remains PENDING.

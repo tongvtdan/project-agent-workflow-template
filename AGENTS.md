@@ -38,6 +38,8 @@ Before substantial work read this contract, the nearest scoped AGENTS.md, [the g
 | Request structure and examples | [Request library](docs/delivery/reusable-requests.md) |
 | Ownership transfer and review | [Development guide](docs/delivery/development-team.md) |
 | Issue, PR, CI, review, and release gates | [WORKFLOW.md](WORKFLOW.md) |
+| Feature behavior/design/task/evidence structure | [Feature specifications](docs/specs/README.md) |
+| Proactive work ideas; no configured workers | [Automation recipes](docs/automation.md) |
 | Fictional filled-in walkthrough | [Trail Log](examples/trail-log.md) |
 
 Tool adapters link to these sources. Flag conflicting contracts; never silently rewrite one. Scoped guides refine local placement and commands without weakening root security/release gates. Explicit user scope and applicable project contracts govern.
@@ -51,6 +53,10 @@ Read-only requests permit inspection and safe diagnostics. Build/Fix permit the 
 Preserve existing PRODUCT, ARCHITECTURE, PATENT, TRIZ, GROWTH, PRETOTYPE, CRITIC, and SYNTHESIS meanings and allow stacking. Default to SYNTHESIS only when no project/task mode is set.
 
 Label claims VERIFIED, REPORTED, ESTIMATED, HYPOTHESIS, or UNKNOWN/PENDING. Acceptance is PASS, FAIL, or PENDING. Record actual commands/results and relevant versions. A build alone does not prove behavior or real-world readiness.
+
+For substantial feature work, link requirements (or bug analysis), technical design, dependency-ordered tasks, and an append-only activity record using docs/specs/README.md. Keep small fixes in their existing issue. Execute dependency-ready tasks within the agreed scope without requesting approval for every routine step. Material scope/authority changes and existing review gates still apply.
+
+GitHub remains the issue-status authority. Task verification describes evidence only; PROJECT_STATE.md holds the active feature/task pointer and current candidate. Only the coordinator updates shared state/activity after reconciling reports. On resume or after compaction, reload the active bundle/recent activity and verify consequential claims against current artifacts.
 
 ## Naming and shortcuts
 

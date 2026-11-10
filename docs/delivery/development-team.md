@@ -16,6 +16,8 @@ Use only the perspectives needed for the task. One agent can cover product, engi
 
 The current writer owns edits to shared artifacts. Reviewers inspect and run safe relevant checks without changing tracked files. Before transferring ownership, record the outgoing writer, affected paths, diff/branch/commit, check results, open findings, and incoming writer.
 
+The coordinator alone updates PROJECT_STATE.md and the shared feature activity/task evidence after reconciling reports. On resume/compaction, reload the active pointer and recent activity, then verify actual files/candidates/results. Follow [feature specifications](../specs/README.md); a subagent report is REPORTED until checked.
+
 Isolated authorized worktrees can separate implementation work; integration into a shared artifact still has one writer. /Team alone creates a coordination plan. It does not authorize subagent spawning, new chats, messages, or assignments in external systems.
 
 ## Review and release
