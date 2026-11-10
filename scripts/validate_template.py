@@ -27,11 +27,25 @@ LINK = re.compile(r"!?\[[^\]]*\]\((<[^>]+>|[^\s)]+)(?:\s+[\"'][^\n]*?[\"'])?\)")
 PLACEHOLDER = re.compile(r"<[^<>\n]+>")
 REQUIREMENT_LINK = re.compile(r"\[(R[1-9]\d*)\]\(([^)]+)\)")
 EVIDENCE_LINK = re.compile(r"\[(?:[^\]]+)\]\(activity\.md#(e[1-9]\d*)\)")
+INLINE_CODE = re.compile(r"(?<!`)(`+)(?!`)(.*?)(?<!`)\1(?!`)", re.S)
 TASK_FIELDS = (
     "Outcome", "Requirements", "Depends on", "Owner", "Scope", "Acceptance",
     "Check", "Verification state", "Evidence", "Issue",
 )
 EVIDENCE_FIELDS = ("Task", "Timestamp", "Candidate", "Environment", "Procedure", "Result", "Observation")
+
+
+def without_inline_code(text):
+    return INLINE_CODE.sub(lambda match: re.sub(r"[^\n]", " ", match.group(0)), text)
+
+
+def link_values(pattern, text, allow_images=False):
+    text = without_inline_code(text)
+    for match in pattern.finditer(text):
+        before = text[match.start() - 1] if match.start() else ""
+        if before == chr(92) or (before == "!" and not allow_images):
+            continue
+        yield match.groups()
 
 
 def prose(text):
@@ -96,7 +110,7 @@ def fields(block, names, label, errors):
 
 def requirement_refs(text, source, known, label, errors):
     refs = set()
-    for identifier, target in REQUIREMENT_LINK.findall(text):
+    for identifier, target in link_values(REQUIREMENT_LINK, text):
         if target != f"{source}#{identifier.lower()}" or identifier not in known:
             errors.append(f"{label}: invalid requirement reference {identifier} ({target})")
         else:
@@ -166,7 +180,7 @@ def feature_specs(root, errors):
             state = task["Verification state"]
             if state not in {"PASS", "FAIL", "PENDING"}:
                 errors.append(f"{task_label}: invalid verification state {state!r}")
-            record_links = EVIDENCE_LINK.findall(task["Evidence"])
+            record_links = [reference for (reference,) in link_values(EVIDENCE_LINK, task["Evidence"])]
             if task["Evidence"] != "PENDING" and not record_links:
                 errors.append(f"{task_label}: evidence must link to an E record in activity.md")
             for reference in record_links:
@@ -227,7 +241,7 @@ def validate(root=ROOT):
         for number, line in enumerate(text.splitlines(), 1):
             if line.rstrip() != line:
                 errors.append(f"{relative}:{number}: trailing whitespace")
-        for target in LINK.findall(body):
+        for (target,) in link_values(LINK, body, allow_images=True):
             target = target.removeprefix("<").removesuffix(">")
             if re.match(r"[a-zA-Z][a-zA-Z0-9+.-]*:", target) or target.startswith("//"):
                 continue
@@ -245,7 +259,7 @@ def validate(root=ROOT):
             elif fragment and destination.suffix == ".md":
                 if unquote(fragment) not in anchors(destination.read_text(encoding="utf-8")):
                     errors.append(f"{relative}: missing heading anchor: {target}")
-        unquoted = re.sub(r"`+[^`]*`+", "", body)
+        unquoted = without_inline_code(body)
         if PLACEHOLDER.search(unquoted):
             errors.append(f"{relative}: wrap prose placeholders in code spans so Markdown preserves them")
 

@@ -53,3 +53,9 @@ Added a requirements/bugfix → technical design → dependency-ordered tasks �
 Proactive project-health and PR-watch recipes are DOCUMENTED ONLY and NOT CONFIGURED. No scheduler, bot, worker, or registration was created. The existing deterministic CI check now also runs validator regression tests.
 
 VERIFIED locally with Python 3.14.7: python3 scripts/validate_template.py passed on 26 Markdown documents, 146 local links/anchors, and one feature bundle; python3 -m unittest discover -s tests -v passed 29 tests; git diff --check passed. Tests cover valid feature/bugfix formats, broken links, requirement coverage, duplicate IDs, missing acceptance, cycles/unknown dependencies, and unsupported PASS evidence. This is same-agent self-review, not independent review or app verification. Trail Log application behavior remains PENDING.
+
+## Post-merge reference review: 2026-11-10
+
+Found a traceability defect: code-formatted or escaped references and image labels could count as requirement/evidence links. A literal evidence example could therefore support a task PASS claim even though it was not a clickable reference. Literal broken-link examples also produced false validation failures.
+
+The validator now excludes inline code and escaped text when collecting links, and rejects image labels as traceability/evidence links. Ordinary image paths still receive local-target validation. New regression cases failed before the correction; afterward all 34 tests and validation of 26 documents/146 links passed. Proactive recipes and CI triggers were not changed. This is same-agent review; structural checks still do not prove real application behavior or evidence freshness.

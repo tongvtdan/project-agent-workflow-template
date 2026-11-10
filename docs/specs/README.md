@@ -31,6 +31,8 @@ For bugfix.md, record current behavior/reproducer, expected behavior, and behavi
 
 Reference every requirement using an ordinary local Markdown link, for example [R1](trail-log-offline-save/requirements.md#r1). Inside a bundle, link to its own requirements.md or bugfix.md. Include owning paths/interfaces, data flow, persistence/migration boundaries, failure states, and checks. Link to root DESIGN.md for visual rules.
 
+Traceability/evidence references must be ordinary clickable links. Code-formatted examples, escaped bracket text, and image labels are not requirement or evidence links.
+
 Do not introduce a new architecture to fill a diagram. Record the smallest viable design and important alternatives/decisions.
 
 ## Task format
