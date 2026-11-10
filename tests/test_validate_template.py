@@ -145,6 +145,40 @@ class TemplateValidationTests(unittest.TestCase):
         self.replace(self.tasks, line, "- Requirements: R1", 1)
         self.check("T1: no valid requirement links")
 
+    def test_code_formatted_requirements_are_not_links(self):
+        line = next(line for line in self.tasks.read_text().splitlines() if line.startswith("- Requirements:"))
+        self.replace(self.tasks, line, "- Requirements: `" + line.split(": ", 1)[1] + "`", 1)
+        self.check("T1: no valid requirement links")
+
+    def test_escaped_requirements_are_not_links(self):
+        line = next(line for line in self.tasks.read_text().splitlines() if line.startswith("- Requirements:"))
+        self.replace(self.tasks, line, line.replace("[", "\\["), 1)
+        self.check("T1: no valid requirement links")
+
+    def test_code_formatted_design_reference_does_not_cover_requirement(self):
+        self.replace(self.bundle / "design.md", "[R1](requirements.md#r1)", "`[R1](requirements.md#r1)`")
+        self.check("requirement R1 has no design link")
+
+    def test_code_formatted_local_link_example_is_not_validated(self):
+        self.append(self.root / "README.md", "\nLiteral example: `[Example](not-a-real-file.md)`\n")
+        self.check()
+
+    def test_unmatched_backtick_does_not_hide_links_in_later_paragraphs(self):
+        self.append(self.root / "README.md", "\nUnmatched `.\n\n[Broken](missing.md)\n\nUse `command`.\n")
+        self.check("missing local link target")
+
+    def test_escaped_backtick_does_not_open_code_span(self):
+        self.append(self.root / "README.md", "\nLiteral \\` then [Broken](missing.md) and `command`.\n")
+        self.check("missing local link target")
+
+    def test_multiline_code_span_masks_literal_link(self):
+        self.append(self.root / "README.md", "\nExample: `first line\n[Literal](missing.md)`\n")
+        self.check()
+
+    def test_even_backslashes_do_not_escape_code_opener(self):
+        self.append(self.root / "README.md", "\nExample: \\\\`[Literal](missing.md)`\n")
+        self.check()
+
     def test_duplicate_task_id(self):
         text = self.tasks.read_text()
         block = text[text.index("## T1\n"):text.index("## T2\n")]
@@ -166,6 +200,22 @@ class TemplateValidationTests(unittest.TestCase):
     def test_pass_requires_evidence(self):
         self.replace(self.tasks, "- Verification state: PENDING", "- Verification state: PASS", 1)
         self.check("PASS requires linked evidence")
+
+    def test_pass_requires_real_evidence_link_not_literal_or_image(self):
+        self.pass_task()
+        self.evidence()
+        text = self.tasks.read_text()
+        variants = (
+            "`[E1](activity.md#e1)`",
+            "``[E1](activity.md#e1)``",
+            "``example `literal` [E1](activity.md#e1)``",
+            "\\[E1](activity.md#e1)",
+            "![E1](activity.md#e1)",
+        )
+        for value in variants:
+            with self.subTest(value=value):
+                self.tasks.write_text(text.replace("- Evidence: [E1](activity.md#e1)", "- Evidence: " + value))
+                self.check("PASS requires linked evidence")
 
     def test_pass_rejects_wrong_task_evidence(self):
         self.pass_task()
