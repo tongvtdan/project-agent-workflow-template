@@ -10,6 +10,8 @@ Each project owns one counter across platforms. Preserve a valid existing title 
 
 Use `<PREFIX>-<PLATFORM>-<NN> | <Task or Subsystem>`.
 
+For a task focused on a verified GitHub issue, include it in the task portion: `<PREFIX>-<PLATFORM>-<NN> | #<issue> <Task or Subsystem>`. Qualify it as `owner/repo#<issue>` if the repository is ambiguous. The chat sequence remains independent of issue/task IDs. Do not invent an issue link or rename unrelated history.
+
 | Actual environment | Marker |
 | --- | --- |
 | Codex | X |

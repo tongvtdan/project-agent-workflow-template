@@ -33,6 +33,8 @@ Record verified, historical, and reserved assignments explicitly. Never convert 
 - Updated at / timezone: `<date, time, timezone>`.
 - Observable outcome: `<user-visible result>`.
 - Sources inspected: `<current files, contracts, issue, and version>`.
+- Active feature bundle / next task: `<bundle path and T ID, or existing issue for a small fix>`.
+- Activity record: `<active bundle activity.md path, or none for a short completed task>`.
 - Allowed changes: `<surfaces and operations authorized>`.
 - Excluded changes: `<explicit boundaries>`.
 - Owner / current writer: `<person or agent>`.
@@ -41,6 +43,8 @@ Record verified, historical, and reserved assignments explicitly. Never convert 
 - Required evidence: `<commands, manual checks, device or external checks>`.
 - Review / release constraints: `<required reviewers and protected actions>`.
 - Repo / branch / commit / worktree: `<actual values and dirty files, or unavailable>`.
+
+Keep this section current and compact. Detailed requirements, dependency contracts, and historical attempts belong in the [active feature bundle](docs/specs/README.md); GitHub owns issue status. After compaction/resume, read this record and the linked recent activity, then verify the current candidate and actual results before continuing.
 
 ## Evidence and acceptance
 

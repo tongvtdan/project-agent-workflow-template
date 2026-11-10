@@ -24,5 +24,8 @@ jobs:
       - name: Validate template documentation
         run: python3 scripts/validate_template.py
 
+      - name: Test validator failure cases
+        run: python3 -m unittest discover -s tests -v
+
       - name: Check whitespace
         run: git show --format= --check HEAD

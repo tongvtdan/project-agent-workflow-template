@@ -31,6 +31,18 @@ Local artifacts from safe test runs are permitted; no alias authorizes commits, 
 
 A compound request is interpreted as a sequence: "/Review the docs, then update the naming rules" authorizes the review followed by the explicitly requested documentation edits.
 
+## Feature execution
+
+Use the [feature contract](docs/specs/README.md) without adding a second set of slash commands:
+
+- /Plan prepares requirements/bug analysis, technical design, and task dependencies at the appropriate depth. A planning-only request returns the plan in the response; saving a bundle still needs the request's write authority.
+- /Build and /Fix consume agreed intent and execute dependency-ready tasks within scope. Record actual attempts and evidence when those artifact writes are authorized.
+- /Status reconciles the current pointer and actual evidence; it does not trust a checked box over the current candidate.
+- /QA returns the [review packet](docs/specs/README.md#return-a-review-packet). Required review that errors or is unavailable is PENDING.
+- /Handoff links the active bundle, recent activity, candidate, results, and next success criterion; it does not create another status ledger.
+
+The [proactive recipes](docs/automation.md) are documented only. None of these aliases register automations, start workers, or authorize delegation.
+
 ## Modes select a perspective
 
 Keep an existing project/task MODE. Otherwise default to SYNTHESIS. Modes may stack; they do not change operation permissions.

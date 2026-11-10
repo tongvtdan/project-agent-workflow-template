@@ -19,6 +19,8 @@ What user or business behavior changes?
 
 Current files/contracts, owner, implementation writer, and required reviewer.
 
+For substantial work link the requirement IDs, technical design, dependency-ordered tasks, and activity record from the feature bundle. Keep a small fix's contract in this issue. Live issue status follows the configured tracker, not a second task-status ledger.
+
 Fictional example: Trail Log's checklist repository owns offline saving; the writer changes save/load only and the reviewer checks restart and failed-save behavior.
 
 ## Product Rule

@@ -10,6 +10,7 @@ For a filled-in example, read [Trail Log](examples/trail-log.md), a fictional of
 2. Read the Trail Log example, then fill actual product, stack, ownership, commands, and non-goals in [AGENTS.md](AGENTS.md). Delete irrelevant sections.
 3. Fill [DESIGN.md](DESIGN.md) with the actual visual/interaction contract. It is a detailed reference; keep only what the MVP needs.
 4. Turn one outcome into an independently verifiable slice in [SPEC.md](SPEC.md).
+   For substantial work, prepare a [feature bundle](docs/specs/README.md); use the [Trail Log offline-save bundle](docs/specs/trail-log-offline-save/requirements.md) as a fictional worked example. Small fixes can keep the same contract in the issue.
 5. Configure [WORKFLOW.md](WORKFLOW.md) for the actual repository, default branch, board, and required checks. Its frontmatter is documentation, not an installed automation.
 6. Fill [PROJECT_STATE.md](PROJECT_STATE.md) from current evidence. Leave the prefix UNCONFIRMED until the owner confirms it under [CHAT_NAMING.md](CHAT_NAMING.md). Examples never assign a real prefix or sequence.
 7. Review [SHORTCUTS.md](SHORTCUTS.md) once. These aliases work through project instructions; they are not registered native slash commands.
@@ -30,6 +31,8 @@ A template-generated repo copies files, not the original repo's issues, board co
 | [PROJECT_STATE.md](PROJECT_STATE.md) | Identity/confirmation, assignments, task/evidence/resume | Save failure is PENDING until checked |
 | [DESIGN.md](DESIGN.md) | UI, tokens, states, copy, accessibility | Visible saving/saved/failed-save states |
 | [SPEC.md](SPEC.md) | Scope, acceptance, issue-sized work | Preserve packed flags across restart |
+| [Feature bundles](docs/specs/README.md) | Requirements → technical design → tasks → activity → review packet | [Trail Log offline save](docs/specs/trail-log-offline-save/tasks.md) |
+| [Automation recipes](docs/automation.md) | Documented, unregistered ideas for proactive review | Project health review and bounded PR watch |
 | [WORKFLOW.md](WORKFLOW.md) | Issue/branch/PR/review/release loop | Review evidence before closing the issue |
 | [Request library](docs/delivery/reusable-requests.md) | Reusable outcome/scope/failure/evidence requests | Verify failed-save and retry behavior |
 | [Development guide](docs/delivery/development-team.md) | One writer, review, ownership transfer | Separate implementation from assigned QA |
@@ -39,6 +42,8 @@ A template-generated repo copies files, not the original repo's issues, board co
 | [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) | PR description | Actual commands and remaining gaps |
 
 Keep one source per policy. Adapters link to canonical docs instead of copying them. Flag conflicts before acting; do not silently weaken a contract.
+
+Root DESIGN.md is the visual system; a bundle's design.md is its technical plan. GitHub owns issue status, tasks.md owns dependency contracts and evidence links, activity.md records actual attempts, and PROJECT_STATE.md points to the active work. Do not maintain duplicate status ledgers.
 
 ## Naming and alias behavior
 
@@ -92,6 +97,14 @@ Run the template-maintenance checks without installing dependencies:
 python3 scripts/validate_template.py
 ```
 
-The active `validate-template.yml` workflow runs this command for pull requests and pushes to main. It checks required template files, relative links/heading anchors, visible placeholders, whitespace, and CI starter references. The app CI starter remains opt-in.
+The active `validate-template.yml` workflow runs this command and validator regression tests for pull requests and pushes to main. It checks required template files, relative links/heading anchors, visible placeholders, whitespace, CI references, feature requirement/task coverage, dependency cycles, and PASS evidence records. The app CI starter remains opt-in.
+
+Run the regression tests locally:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+Structural validation cannot prove an app command ran, evidence is still current, or a human approved the result. Review actual artifacts/candidates. [Proactive recipes](docs/automation.md) remain unregistered documentation; this update starts no bots.
 
 When adopting the kit for a product, remove or adapt this maintenance script and its workflow together before deleting template-only files. Configure the product's own app checks separately; template validation is not an application test.
