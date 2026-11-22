@@ -1,110 +1,45 @@
-# Project Agent Workflow Template
+# Coding project starter
 
-Start a product project with shared instructions for coding agents, a small issue/PR workflow, and explicit evidence for completion.
+Give Codex, Claude Code, and Gemini CLI the same project instructions. Start with one task in plain language. The template includes a fictional packing-list app, [Trail Log](examples/trail-log.md), as a worked example.
 
-For a filled-in example, read [Trail Log](examples/trail-log.md), a fictional offline packing-checklist app. Product names, prefixes, issue numbers, metrics, and results there are illustrative; they are not live configuration.
+## Start a project
 
-## Start a new project
+1. Choose **Use this template** on GitHub, or copy the starter into a project, including the hidden `.github` directory if you use GitHub. When adopting it in an existing repository, merge the files with your current instructions and CI.
+2. Fill in [AGENTS.md](AGENTS.md) with the purpose, code locations, command working directories, and real commands. Verify the commands against the repository. Keep a scoped [app guide](app/AGENTS.md) only where a directory has additional rules.
+3. Open the project root in your coding agent. Codex reads the shared guide directly. [Claude Code](CLAUDE.md) and [Gemini CLI](GEMINI.md) import it. Ask the agent which directory owns a change and which command checks it. Compare its answer with your configuration.
+4. Describe one observable outcome. Follow [the workflow](WORKFLOW.md) for the type of work. Local work needs only a request. For work that another session will resume, fill in [project state](PROJECT_STATE.md).
 
-1. Choose **Use this template** on the repository to create a new repo, or copy the files (including hidden .github files) into an existing project. For an existing repo, inspect overlapping files and merge instructions instead of overwriting them.
-2. Read the Trail Log example, then fill actual product, stack, ownership, commands, and non-goals in [AGENTS.md](AGENTS.md). Delete irrelevant sections.
-3. Fill [DESIGN.md](DESIGN.md) with the actual visual/interaction contract. It is a detailed reference; keep only what the MVP needs.
-4. Turn one outcome into an independently verifiable slice in [SPEC.md](SPEC.md).
-   For substantial work, prepare a [feature bundle](docs/specs/README.md); use the [Trail Log offline-save bundle](docs/specs/trail-log-offline-save/requirements.md) as a fictional worked example. Small fixes can keep the same contract in the issue.
-5. Configure [WORKFLOW.md](WORKFLOW.md) for the actual repository, default branch, board, and required checks. Its frontmatter is documentation, not an installed automation.
-6. Fill [PROJECT_STATE.md](PROJECT_STATE.md) from current evidence. Leave the prefix UNCONFIRMED until the owner confirms it under [CHAT_NAMING.md](CHAT_NAMING.md). Examples never assign a real prefix or sequence.
-7. Review [SHORTCUTS.md](SHORTCUTS.md) once. These aliases work through project instructions; they are not registered native slash commands.
-8. Adapt [app/AGENTS.md](app/AGENTS.md) only if the app folder has different placement or command rules. Rename/move it to the actual app root and correct its relative links; remove it when unnecessary.
-9. Configure the opt-in [.github/workflows/ci.yml.example](.github/workflows/ci.yml.example), then rename it to ci.yml. In WORKFLOW.md, set the documentation field `ci.enabled` to `true`; do not add an `enabled` key to the GitHub Actions YAML. Require the actual lint-test-build check and any project-specific gates; preserve existing protection/review requirements.
-10. Replace the template README with a product README when ready. Keep the fictional example as a reference or remove it and update its links.
+**Try the first request.** In the fictional Trail Log project: “Packed items lose their checkmarks after restart. Reproduce this with a two-item list, check one item, and compare the saved value with what loads after restart. Show me where the values first differ.” Replace that symptom with one from your implementation. The starter contains documentation and a template validator.
 
-A template-generated repo copies files, not the original repo's issues, board configuration, branch protection, or external integrations. Configure and verify those in the new project.
+## Open a guide when you need it
 
-## What each file owns
+| When | Read |
+| --- | --- |
+| Starting Codex or checking its instruction scope | [Codex quick-start](CODEX.md) |
+| Working on a feature with several dependent tasks | [Feature index](SPEC.md) and [bundle format](docs/specs/README.md) |
+| Changing user interface behavior | [Visual and interaction design](DESIGN.md) |
+| Framing a product decision or writing a focused request | [Request examples and optional PM references](docs/delivery/reusable-requests.md) |
+| Coordinating several contributors | [Writer and reviewer handoff](docs/delivery/development-team.md) |
+| Adopting shortcut phrases or numbered chat titles | [Shortcuts](SHORTCUTS.md) or [optional naming convention](CHAT_NAMING.md) |
+| Reviewing the size or risk of a change | [Coding guardrails](karpathy-guidelines/SKILL.md) |
+| Exploring proactive reviews | [Documented recipes](docs/automation.md) |
 
-| File | Responsibility | Fictional Trail Log example |
-| --- | --- | --- |
-| [AGENTS.md](AGENTS.md) | Product contract, architecture boundaries, actual commands | Preserve offline checklist saves |
-| [CODEX.md](CODEX.md) / [CLAUDE.md](CLAUDE.md) | Thin tool orientation pointing to shared rules | Same save contract in every coding client |
-| [SHORTCUTS.md](SHORTCUTS.md) | Aliases, operation permissions, MODE perspectives | /Investigate a restart loss; /Fix the specified cause |
-| [CHAT_NAMING.md](CHAT_NAMING.md) | Confirmed prefix, environment marker, shared counter policy | TL-X-01, TL-C-02, TL-W-03 |
-| [PROJECT_STATE.md](PROJECT_STATE.md) | Identity/confirmation, assignments, task/evidence/resume | Save failure is PENDING until checked |
-| [DESIGN.md](DESIGN.md) | UI, tokens, states, copy, accessibility | Visible saving/saved/failed-save states |
-| [SPEC.md](SPEC.md) | Scope, acceptance, issue-sized work | Preserve packed flags across restart |
-| [Feature bundles](docs/specs/README.md) | Requirements → technical design → tasks → activity → review packet | [Trail Log offline save](docs/specs/trail-log-offline-save/tasks.md) |
-| [Automation recipes](docs/automation.md) | Documented, unregistered ideas for proactive review | Project health review and bounded PR watch |
-| [WORKFLOW.md](WORKFLOW.md) | Issue/branch/PR/review/release loop | Review evidence before closing the issue |
-| [Request library](docs/delivery/reusable-requests.md) | Reusable outcome/scope/failure/evidence requests | Verify failed-save and retry behavior |
-| [Development guide](docs/delivery/development-team.md) | One writer, review, ownership transfer | Separate implementation from assigned QA |
-| [Guardrails](karpathy-guidelines/SKILL.md) | Simple changes, explicit assumptions, verified outcomes | Reject blank items at the owning boundary |
-| [.github/ISSUE_TEMPLATE/feature_request.md](.github/ISSUE_TEMPLATE/feature_request.md) | Feature issue body | Outcome, non-goals, failure acceptance |
-| [.github/ISSUE_TEMPLATE/bug_report.md](.github/ISSUE_TEMPLATE/bug_report.md) | Bug issue body | Reproducer and regression evidence |
-| [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) | PR description | Actual commands and remaining gaps |
+If you adopt shortcuts or chat naming, add a link to the chosen convention in the shared project instructions. Plain-language tasks work with the default setup.
 
-Keep one source per policy. Adapters link to canonical docs instead of copying them. Flag conflicts before acting; do not silently weaken a contract.
+## Adopt or upgrade
 
-Root DESIGN.md is the visual system; a bundle's design.md is its technical plan. GitHub owns issue status, tasks.md owns dependency contracts and evidence links, activity.md records actual attempts, and PROJECT_STATE.md points to the active work. Do not maintain duplicate status ledgers.
+Retain existing project commands, scoped instructions, required reviews, and CI protections. If you use chat naming, carry the existing prefix, source, inventory, and every historical or reserved assignment into the naming record before replacing the old state file. Keep a single authoritative ledger. The example names and task numbers are fictional.
 
-## Naming and alias behavior
+The [app CI starter](.github/workflows/ci.yml.example) is opt-in. Configure it for the actual stack and default branch. A GitHub template copies repository files. Configure board links, check requirements, and integrations separately if you use them.
 
-Names use `<PREFIX>-<PLATFORM>-<NN> | <Task or Subsystem>`. X is Codex, C is ChatGPT Chat, W is ChatGPT Work. A project has one counter across those environments. Confirm a prefix once, inspect available inventories/archives/linked assignments, preserve existing numbers, and verify a native saved title before claiming success.
+## Check the template itself
 
-Without supported tools or sufficient identity/numbering evidence, continue the substantive task silently. A heading is not a title change.
-
-Read-only aliases inspect and explain. /Build and /Fix authorize scoped implementation; /Addtests requests scoped tests; /Release assesses readiness; /Team proposes coordination. External writes, spawning agents, messages, commits, pushes, merges, deployment, and spending require authority from the actual task or project policy.
-
-## GitHub Project setup
-
-Use a user- or organization-owned Project. Reuse an existing board when appropriate; linking it does not automatically add all issues.
-
-Example shell commands below require replacing every angle-bracket placeholder before use:
-
-```sh
-gh auth login
-gh project create --owner <owner> --title "<Project Name> - <initiative>"
-gh project link <project-number> --owner <owner> --repo <owner>/<repo>
-gh project field-list <project-number> --owner <owner>
-```
-
-Inspect the existing Status field first. Configure its options in the UI instead of creating a duplicate. Suggested states: Backlog, Ready, In Progress, In Review, Done, Parked. Record the chosen field/label authority in WORKFLOW.md.
-
-User board URLs follow `https://github.com/users/<owner>/projects/<number>`; organization board URLs follow `https://github.com/orgs/<owner>/projects/<number>`. Save the verified URL in project configuration. New boards, issues, and status changes still require task authority.
-
-## Before first implementation
-
-- Fill product/architecture/command placeholders; leave unverified claims explicitly pending.
-- Confirm aliases and tool adapters agree about permissions and human review.
-- Confirm naming examples are not live assignments.
-- Make the actual app folder, paths, links, and commands match the repo.
-- Configure/verify CI before requiring its job; retain existing security gates.
-- Define one user outcome with normal, boundary, and failure acceptance.
-- Record actual evidence rather than copying sample results.
-
-Useful placeholder scan:
-
-```sh
-rg -n '<[^>]+>|TODO|TBD|FIXME|ISSUE_NUMBER' AGENTS.md PROJECT_STATE.md SPEC.md WORKFLOW.md DESIGN.md app .github
-git diff --check
-```
-
-A placeholder scan helps setup; it is not a complete validation or evidence that the app works. Sample app commands are intentionally not runnable in this docs-only repository.
-
-## Validate the template
-
-Run the template-maintenance checks without installing dependencies:
+From the repository root run:
 
 ```sh
 python3 scripts/validate_template.py
-```
-
-The active `validate-template.yml` workflow runs this command and validator regression tests for pull requests and pushes to main. It checks required template files, relative links/heading anchors, visible placeholders, whitespace, CI references, feature requirement/task coverage, dependency cycles, and PASS evidence records. The app CI starter remains opt-in.
-
-Run the regression tests locally:
-
-```sh
 python3 -m unittest discover -s tests -v
+git diff --check
 ```
 
-Structural validation cannot prove an app command ran, evidence is still current, or a human approved the result. Review actual artifacts/candidates. [Proactive recipes](docs/automation.md) remain unregistered documentation; this update starts no bots.
-
-When adopting the kit for a product, remove or adapt this maintenance script and its workflow together before deleting template-only files. Configure the product's own app checks separately; template validation is not an application test.
+These commands check the starter documents and their validation rules. To remove optional starter files in a generated project, update incoming links and adapt or retire the template validator, its fixture tests, and its template CI job together. Keep the project's application checks active.

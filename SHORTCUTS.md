@@ -43,21 +43,4 @@ Use the [feature contract](docs/specs/README.md) without adding a second set of 
 
 The [proactive recipes](docs/automation.md) are documented only. None of these aliases register automations, start workers, or authorize delegation.
 
-## Modes select a perspective
-
-Keep an existing project/task MODE. Otherwise default to SYNTHESIS. Modes may stack; they do not change operation permissions.
-
-| Mode | Perspective | Trail Log example |
-| --- | --- | --- |
-| PRODUCT | User outcome, activation, retention, revenue | Reduce first-list setup steps |
-| ARCHITECTURE | Boundaries, data flow, maintainability | Separate persistence from list rules |
-| PATENT | Invention/IP questions and evidence needs | Identify a question needing qualified IP review |
-| TRIZ | Contradictions and constrained invention | Reduce input effort while preserving useful detail |
-| GROWTH | Distribution and conversion after value | Test demand for shareable list exports |
-| PRETOTYPE | Cheapest credible test of an assumption | Observe users trying a paper packing checklist |
-| CRITIC | Failure modes and contrary evidence | Test whether exports matter before building them |
-| SYNTHESIS | Reconcile product, engineering, and growth | Choose the next independently verifiable slice |
-
-Example: MODE PRODUCT + ARCHITECTURE with "/Plan offline list export" changes the planning perspective; it still authorizes planning only.
-
 See the [request library](docs/delivery/reusable-requests.md) for reusable request structure and [Trail Log](examples/trail-log.md) for a complete fictional walkthrough.

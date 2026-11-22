@@ -1,10 +1,10 @@
 # Chat naming
 
-This file owns chat-title policy. [PROJECT_STATE.md](PROJECT_STATE.md) owns project identity, confirmation evidence, linked inventories, and recorded assignments. Naming never authorizes creating, messaging, moving, or bulk-renaming chats.
+Adopt this convention only if the owner wants numbered chat titles. Keep identity, confirmation evidence and assignments in the project record below, or link the existing authoritative ledger. Naming never authorizes creating, messaging, moving, or bulk-renaming chats.
 
 ## Project configuration
 
-Start with the project-state fields unresolved. Ask the owner to confirm a missing prefix once when supported naming tools and sufficient inventory are otherwise available. Save the answer and its source in project state. Never infer a prefix from a directory, repository, example, or product name.
+For a new project, start with the project record unresolved. Ask the owner to confirm a missing prefix once when supported naming tools and sufficient inventory are otherwise available. Save the answer and its source in the project record. Never infer a prefix from a directory, repository, example, or product name.
 
 Each project owns one counter across platforms. Preserve a valid existing title and its assigned number.
 
@@ -18,9 +18,21 @@ For a task focused on a verified GitHub issue, include it in the task portion: `
 | ChatGPT Chat | C |
 | ChatGPT Work | W |
 
-Other tools require an owner-confirmed marker before assignment. Never choose the marker from the subject of the task. If identity, mode, title access, or safe numbering cannot be verified, silently skip naming and continue substantive work. Explain a limitation only if asked.
+Other tools require an owner-confirmed marker before assignment. Never choose the marker from the subject of the task. If identity, environment, title access, or safe numbering cannot be verified, silently skip naming and continue substantive work. Explain a limitation only if asked.
 
 Projectless chats use a concise descriptive title with no prefix or sequence.
+
+## Project record
+
+- Project / confirmed prefix: UNCONFIRMED.
+- Confirmation source / date: pending.
+- Linked platforms, hosts and inventory coverage: unknown until checked.
+- Existing authoritative ledger (if any): unconfigured.
+
+| Number | Environment | Saved title or reservation | Reference / confirmation | State |
+| --- | --- | --- | --- | --- |
+
+When upgrading, retain every existing assignment and reservation, including its evidence. Keep the existing ledger authoritative until any transfer is reconciled.
 
 ## Assignment procedure
 

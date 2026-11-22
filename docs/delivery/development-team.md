@@ -1,6 +1,6 @@
 # Development ownership and review
 
-Use only the perspectives needed for the task. One agent can cover product, engineering, and growth; describe its review as same-agent self-review. Do not claim independent verification unless another authorized reviewer performed it.
+Use this guide when more than one contributor shares a task. When the implementer reviews their own work, label it as self-review. Do not claim independent verification unless another authorized reviewer performed it.
 
 ## Roles
 
