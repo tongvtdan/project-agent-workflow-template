@@ -8,7 +8,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
-    "AGENTS.md", "CODEX.md", "CLAUDE.md", "CHAT_NAMING.md", "PROJECT_STATE.md",
+    "AGENTS.md", "CODEX.md", "CLAUDE.md", "GEMINI.md", "CHAT_NAMING.md", "PROJECT_STATE.md",
     "SHORTCUTS.md", "SPEC.md", "DESIGN.md", "WORKFLOW.md", "README.md",
     "app/AGENTS.md", "docs/delivery/reusable-requests.md",
     "docs/delivery/development-team.md", "examples/trail-log.md",
@@ -253,6 +253,13 @@ def feature_specs(root, errors):
 def validate(root=ROOT):
     root = Path(root).resolve()
     errors = [f"missing required path: {name}" for name in REQUIRED if not (root / name).is_file()]
+    for filename in ("CLAUDE.md", "GEMINI.md"):
+        adapter = root / filename
+        if adapter.is_file():
+            body, _ = prose(adapter.read_text(encoding="utf-8"))
+            lines = without_inline_code(body).splitlines()
+            if not any(line.rstrip() in {"@AGENTS.md", "@./AGENTS.md"} for line in lines):
+                errors.append(f"{filename}: expected native import of root AGENTS.md")
     docs = sorted(p for p in root.rglob("*.md") if ".git" not in p.relative_to(root).parts)
     link_count = 0
     for path in docs:

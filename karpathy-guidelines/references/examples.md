@@ -42,7 +42,7 @@ Better approach: distinguish saving, saved, and failed-save states, preserve edi
 
 Weak approach: duplicate all shortcut/naming rules in CODEX.md and CLAUDE.md and later update only one.
 
-Better approach: link both adapters to SHORTCUTS.md, CHAT_NAMING.md, and PROJECT_STATE.md. Read current files before concluding that an older adapter describes the actual architecture.
+Better approach: keep shared rules in AGENTS.md. Import it from the Claude Code and Gemini CLI entry points and link to it from the Codex quick-start. Read current files before concluding that an older adapter describes the actual architecture.
 
 ## Evidence honesty
 

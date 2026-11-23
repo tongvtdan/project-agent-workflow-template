@@ -1,107 +1,35 @@
----
-description: Root operating guide for agents working in the <Project Name> workspace.
-alwaysApply: true
----
+# Project instructions
 
-# Project operating contract
+On an initial setup request, follow [the first-run guide](PROJECT_SETUP.md) and configure this file for the project. All coding agents use it. Before editing a subdirectory, read the applicable scoped AGENTS.md files from the root to the target. The nearest guide supplies local placement and command details.
 
-Resolve this template's placeholders before implementation. [Trail Log](examples/trail-log.md) is a fictional example, never an instruction to configure or rename a live project.
+## Project facts
 
-## Operating model and project memory
-
-Balance product outcome, engineering simplicity, and growth. Prefer the smallest reliable slice that improves activation, retention, or revenue; explain how trust and distribution support those outcomes. Challenge scope without a clear product reason.
-
-Default response: a concise title, insight, decision, execution, actual verification, and one next action. Scale ceremony to the task.
-
-| Field | Value |
+| Field | Fill from the actual repository |
 | --- | --- |
-| Product/public promise | `<Project Name>`: `<specific user outcome>` |
-| Public name/internal codename | `<Public Product Name>` / `<Internal Codename or same>` |
-| Implementation root and stack | `<app_folder>/`; `<actual framework/runtime versions>` |
-| Ship path | `<first input>` → `<first value>` → `<repeat use>` → `<paid/distribution moment>` |
-| Non-goals | `<explicit exclusions and reopening condition>` |
-| Repository/board | `<owner>/<repo>`; `<verified project URL>` |
-| Naming and current task | [PROJECT_STATE.md](PROJECT_STATE.md) |
+| Code source and implementation root | `<repository URL or local folder and owning directory>` |
+| Current PRD or brief | `<file, link, or owner-provided outcome if no separate brief>` |
+| Purpose and user | `<who uses it and what outcome it provides>` |
+| Stack and runtime versions | `<languages, frameworks, supported versions>` |
+| Implementation and test locations | `<paths and responsibilities>` |
+| Data or interface boundaries | `<owners of storage, APIs or generated files>` |
+| Constraints | `<compatibility, privacy, non-goals, required reviewers>` |
 
-Fictional example: Trail Log helps hikers save a packing list offline. The current slice preserves packed flags across restart; accounts and sync are excluded. The example assigns no prefix to a real project.
+## Commands
 
-## Required sources
+Use a path relative to the repository root for each working directory. Record verified commands or mark an operation inapplicable.
 
-Before substantial work read this contract, the nearest scoped AGENTS.md, [the guardrails](karpathy-guidelines/SKILL.md), [WORKFLOW.md](WORKFLOW.md), relevant [SPEC.md](SPEC.md) sections, and [project state](PROJECT_STATE.md). Read [DESIGN.md](DESIGN.md) for UI/copy work.
+| Operation | Working directory | Command |
+| --- | --- | --- |
+| Install | `<directory>` | `<install command>` |
+| Analyze or lint | `<directory>` | `<lint command>` |
+| Targeted test | `<directory>` | `<test command>` |
+| Run locally | `<directory>` | `<run command>` |
+| Build | `<directory>` | `<build command>` |
 
-| Topic | Canonical owner |
-| --- | --- |
-| Product, architecture boundaries, actual commands | Root/scoped AGENTS.md |
-| Aliases, MODE perspectives, operation permissions | [SHORTCUTS.md](SHORTCUTS.md) |
-| Chat-title policy | [CHAT_NAMING.md](CHAT_NAMING.md) |
-| Confirmed identity/prefix, assignments, task/evidence | [PROJECT_STATE.md](PROJECT_STATE.md) |
-| Request structure and examples | [Request library](docs/delivery/reusable-requests.md) |
-| Ownership transfer and review | [Development guide](docs/delivery/development-team.md) |
-| Issue, PR, CI, review, and release gates | [WORKFLOW.md](WORKFLOW.md) |
-| Feature behavior/design/task/evidence structure | [Feature specifications](docs/specs/README.md) |
-| Proactive work ideas; no configured workers | [Automation recipes](docs/automation.md) |
-| Fictional filled-in walkthrough | [Trail Log](examples/trail-log.md) |
+## Working agreements
 
-Tool adapters link to these sources. Flag conflicting contracts; never silently rewrite one. Scoped guides refine local placement and commands without weakening root security/release gates. Explicit user scope and applicable project contracts govern.
-
-## Task and evidence contract
-
-Establish outcome, current sources, allowed/excluded changes, owner/writer, acceptance including realistic failure cases, required evidence, review, and constraints. A small edit needs a short response, not a planning document.
-
-Read-only requests permit inspection and safe diagnostics. Build/Fix permit the stated changes. "Review then update" includes the explicitly requested edits. Follow SHORTCUTS.md for full permissions; no alias/MODE grants external writes, publication, messages, spending, or delegation by itself.
-
-Preserve existing PRODUCT, ARCHITECTURE, PATENT, TRIZ, GROWTH, PRETOTYPE, CRITIC, and SYNTHESIS meanings and allow stacking. Default to SYNTHESIS only when no project/task mode is set.
-
-Label claims VERIFIED, REPORTED, ESTIMATED, HYPOTHESIS, or UNKNOWN/PENDING. Acceptance is PASS, FAIL, or PENDING. Record actual commands/results and relevant versions. A build alone does not prove behavior or real-world readiness.
-
-For substantial feature work, link requirements (or bug analysis), technical design, dependency-ordered tasks, and an append-only activity record using docs/specs/README.md. Keep small fixes in their existing issue. Execute dependency-ready tasks within the agreed scope without requesting approval for every routine step. Material scope/authority changes and existing review gates still apply.
-
-GitHub remains the issue-status authority. Task verification describes evidence only; PROJECT_STATE.md holds the active feature/task pointer and current candidate. Only the coordinator updates shared state/activity after reconciling reports. On resume or after compaction, reload the active bundle/recent activity and verify consequential claims against current artifacts.
-
-## Naming and shortcuts
-
-Follow CHAT_NAMING.md and the confirmed identity/assignments in PROJECT_STATE.md. Format: `<PREFIX>-<PLATFORM>-<NN> | <Task or Subsystem>`; X = Codex, C = ChatGPT Chat, W = ChatGPT Work. Each project keeps one cross-platform counter.
-
-Never infer a prefix or reuse assigned numbers. Preserve valid existing titles/numbers. Inspect available inventories, archives, linked platforms, and recorded assignments; recheck concurrency and verify the native saved title. If tooling/identity/safe numbering cannot be verified, continue substantive work silently. Naming never grants creating, messaging, moving, or bulk-renaming tasks.
-
-Honor aliases case-insensitively. /Review audits; /Fix requests a scoped correction; /Test runs existing checks; /Addtests requests tests. Chat aliases and application keyboard shortcuts are separate.
-
-## Architecture and ownership
-
-Fill these boundaries using the actual codebase. Do not reorganize code to match an example map.
-
-| Boundary | Contract to fill |
-| --- | --- |
-| UI/navigation | `<owning paths and existing patterns>` |
-| State/domain | `<owner, invariants, pure logic boundaries>` |
-| Persistence/migrations | `<source schema, storage API, migration rules>` |
-| Client/server | `<offline requirements and explicit network/auth boundaries>` |
-| Design/copy | `<tokens, localization, accessibility>` |
-| Exports/devices/AI decisions | `<input/output contract and conservative failure states>` |
-| Generated files | `<sources, commands, files not to edit>` |
-
-Preserve user changes. Follow nearby code and existing dependencies. Explain a new dependency's necessity and maintenance cost; retain project approval requirements. Keep local-first behavior unless the task requires otherwise. Missing/ambiguous critical inputs remain unknown/pending rather than falsely successful.
-
-Keep one writer at a time on shared artifacts. Use only necessary reviewers and label same-agent self-review honestly. Follow the development guide for ownership transfer.
-
-## Commands and verification
-
-Run app commands from `<app_folder>/`. Replace these with actual runnable commands:
-
-- Install: `<install command>`.
-- Analyze/lint: `<analyze/lint command>`.
-- Targeted test: `<test command>`.
-- Run/build: `<run command>` / `<build command>`.
-- Generation/migration/localization: `<commands or not applicable>`.
-
-The opt-in CI starter is .github/workflows/ci.yml.example. Configure before renaming to ci.yml; the starter check is lint-test-build. Keep required checks in WORKFLOW.md aligned with actual jobs.
-
-For docs check links, examples, permission consistency, and diff whitespace. For code verify the user-visible path and closest meaningful regression checks. Expand checks when shared contracts change. Persistence, migrations, sync, entitlements, notifications, BLE/hardware, exports, routing, and user-affecting AI outputs need risk-appropriate evidence.
-
-Never weaken CI, branch protection, human review, or protected-execution controls. Sensitive data, entitlements, payments, notifications, migrations, hardware, or user-affecting AI decisions require human review. Software tests do not establish hardware qualification, clinical validation, paid demand, or qualified human security sign-off.
-
-## Completion and handoff
-
-Report outcome, changed artifacts, acceptance PASS/FAIL/PENDING, actual evidence, open risks, and one next action. Save durable state only when authorized, using PROJECT_STATE.md rather than parallel logs.
-
-A handoff includes date/timezone, project/environment, authorized scope/actual changes, artifact/repo/branch/commit links, worktree state, decisions, checks/results, pending physical/external evidence, next success criterion, and a self-contained resume prompt. Exclude secrets, raw patient/sensor data, and unrelated private details.
+- Identify the observable outcome, scope, and acceptance check. Trace the owning code and its callers. Preserve existing user changes and follow the project's patterns.
+- For a bug, reproduce the symptom before choosing a fix. For an agreed change, implement the smallest verifiable slice. Use [the workflow](WORKFLOW.md) for verification, review, and protected actions.
+- Use the local request or linked issue for a small task. Open the [feature contract](docs/specs/README.md) for dependent work, and [UI guidance](DESIGN.md) for a visual change.
+- Investigations and reviews are read-only unless the request also authorizes changes. Keep one writer per shared artifact. Commits, external writes, delegation, merges, and releases follow the authority of the task and project protections.
+- Report what changed, the candidate checked, commands and results, and pending checks. Record unfinished work in [project state](PROJECT_STATE.md) for another session. Keep secrets and private user data out of evidence.

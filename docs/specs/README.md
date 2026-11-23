@@ -1,8 +1,8 @@
 # Feature specifications
 
-Use a feature bundle when work spans multiple tasks, sessions, or architectural boundaries. For a small agreed fix, keep the same outcome, failure case, and verification in the issue instead of creating four documents.
+Use a feature bundle when work spans multiple tasks, sessions, or architectural boundaries. For a small agreed fix, keep the same outcome, failure case, and verification in the local request or issue instead of creating four documents.
 
-The flow is requirements (or bug analysis) → technical design → tasks → implementation and verification → review packet → authorized merge.
+The flow is requirements (or bug analysis) → technical design → tasks → implementation and verification → review packet → acceptance or authorized merge.
 
 ## Sources of truth
 
@@ -14,7 +14,7 @@ The flow is requirements (or bug analysis) → technical design → tasks → im
 | Feature design.md | Technical decisions, interfaces, data flow, failure handling, verification strategy |
 | Feature tasks.md | Task contracts, dependencies, and evidence links |
 | Feature activity.md | Append-only decisions, attempts, actual checks/results, candidate references |
-| GitHub issue/board selected in [WORKFLOW.md](../../WORKFLOW.md) | Authoritative issue status |
+| Issue tracker, when selected in [WORKFLOW.md](../../WORKFLOW.md) | Authoritative issue status |
 | [PROJECT_STATE.md](../../PROJECT_STATE.md) | Active feature/task pointer, current candidate, blockers, next action |
 
 Do not maintain another issue-status ledger in tasks.md. Its verification state describes the task evidence, not whether a GitHub issue is closed or a release is approved. Keep only the active pointer in project state; link to the detailed artifacts.
@@ -29,7 +29,7 @@ For bugfix.md, record current behavior/reproducer, expected behavior, and behavi
 
 ## Technical design
 
-Reference every requirement using an ordinary local Markdown link, for example [R1](trail-log-offline-save/requirements.md#r1). Inside a bundle, link to its own requirements.md or bugfix.md. Include owning paths/interfaces, data flow, persistence/migration boundaries, failure states, and checks. Link to root DESIGN.md for visual rules.
+Reference every requirement using an ordinary local Markdown link, for example [R1](trail-log-offline-save/requirements.md#r1). Inside a bundle, link to its own requirements.md or bugfix.md. Include owning paths/interfaces, data flow, persistence/migration boundaries, failure states, and checks. For UI changes link to the root visual guide.
 
 Traceability/evidence references must be ordinary clickable links. Code-formatted examples, escaped bracket text, and image labels are not requirement or evidence links.
 
@@ -78,7 +78,7 @@ A task marked PASS must link to its own PASS evidence record and have passing de
 
 ## Return a review packet
 
-Use the existing PR description or /QA response, not a new competing review log:
+Return the following in the PR description or local review response:
 
 1. Outcome and requirement/task links.
 2. Checked candidate and changed artifacts/diff.

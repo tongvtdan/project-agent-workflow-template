@@ -1,57 +1,24 @@
-# Reusable requests
+# Requests for coding work
 
-[SHORTCUTS.md](../../SHORTCUTS.md) owns alias behavior and permissions. This file supplies request structure; do not copy a second alias policy into tool adapters.
+Give the agent an outcome, relevant files or symptom, scope, and a way to recognize success. Plain language works in each client. The [shortcut catalogue](../../SHORTCUTS.md) is optional.
 
-## Compact request contract
-
-For substantive work, identify:
-
-- Outcome: one observable user or maintainer result.
-- Sources: current files, issue, constraints, and versions.
-- Scope: allowed surfaces, excluded changes, and authorized external actions.
-- Ownership: lead, one writer, and required review.
-- Acceptance: normal path, boundary case, and realistic failure case.
-- Evidence: reproducible commands and required manual, physical, or external checks.
-
-Scale this to the task. A small edit needs a sentence, not a new planning document. Missing optional details can be stated as assumptions; ask when a missing choice materially changes the result.
-
-## Fictional Trail Log requests
-
-| Request | Outcome, boundary, and evidence |
+| Situation | Fictional Trail Log request |
 | --- | --- |
-| /Whatnext reduce setup time | Inspect the current spec and implementation; recommend one slice, a product reason, acceptance, and the next check. |
-| /Research offline list export | Compare practical options using cited primary sources; separate facts, assumptions, and unverified integration behavior. |
-| /Explain restart restoration | Trace the save/load path with file locations; explain empty and corrupt-data behavior without implementing changes. |
-| /Plan checklist export | Define scope, dependency decisions, happy/empty/error paths, ownership, and verification before implementation. |
-| /Build save checked items offline | Update only list persistence and its callers. Packed flags survive restart. A failed save remains visible and preserves the last saved data. |
-| /Investigate missing checked items | Reproduce with a minimal list, trace save/load ordering, distinguish confirmed cause from hypothesis, and propose the smallest fix. |
-| /Fix empty titles being saved | Reject blank/whitespace titles at the owning boundary. Confirm valid titles still save and existing lists still load. |
-| /Test current persistence diff | Run existing relevant checks and a restart reproduction; report actual commands, exit results, and untested paths. |
-| /Addtests failed-save behavior | Derive tests from the contract: save error is visible, last saved list remains available, and retry does not duplicate entries. |
-| /Review persistence diff | Report actionable defects with severity, location, impact, and a reproducer; label this as same-agent self-review if applicable. |
-| /Security checklist export | Trace whether private notes cross storage or export boundaries; report evidence and gaps without claiming certification. |
-| /Critic adding public profiles | Test the activation/revenue/retention rationale, identify disconfirming evidence, and recommend one smaller experiment. |
-| /QA checklist save | Assess non-empty, empty, duplicate-item, failed-save, and restart criteria; report each as PASS, FAIL, or PENDING. |
-| /Release current branch | Assess configured checks, acceptance, open findings, migrations, and required human review; report readiness without publishing. |
-| /Team storage and export | Propose lead/writer/reviewer responsibilities and acceptance. Use separate agents only if the owner also authorizes delegation. |
-| /Decision export format | Compare readable text and a formatted document against the current user job; recommend one with an explicit tradeoff. |
-| /Status | Report outcome, blocker (or none), and one next action. Reconstruct from current evidence if session context is missing. |
-| /Handoff | Include dated project/environment, scope/actual changes, artifacts/branch/commit, checks/results, pending evidence, and a self-contained resume prompt. |
+| Investigate a bug | “Packed items lose their checkmarks after restart. Reproduce with a two-item list and one checked item. Show where the stored and restored values first differ.” |
+| Implement an agreed fix | “Fix the confirmed save/load mismatch and its direct callers. Preserve the last saved list on failure. Check restart and retry against the changed candidate.” |
+| Verify or hand off | “Review the diff and actual results. Identify which boundary was exercised, what remains pending, and the next check another session can run.” |
 
-The example paths and commands in [Trail Log](../../examples/trail-log.md) describe a fictional Flutter app. They become runnable only after a real project implements those files and commands.
+## When the product decision is still open
 
-## Handoff practice
+Use one short brief: who has the problem, what they do today, what evidence supports a change, and what the owner needs to decide. Separate observed facts from assumptions. For example, before adding shared packing lists to Trail Log, find out how hikers coordinate packing today. A confirmed persistence bug already has a reproduction path.
 
-Use [PROJECT_STATE.md](../../PROJECT_STATE.md) for durable state when saving is authorized. A /Handoff request alone produces a response; it does not grant file edits or commits.
+The upstream PM pack offers these optional methods. They can inform a brief without installing a plugin.
 
-A useful handoff states what was actually changed and checked, the exact remaining acceptance gap, and one next success criterion. Exclude secrets, raw patient/sensor data, and unrelated private project details.
+| Question | Upstream skills |
+| --- | --- |
+| What stage are we at, and what decision is next? | `start-here`, `propose` |
+| Which users experience the problem, and who should we serve first? | `market-segments`, `beachhead-segment` |
+| What alternatives exist, and where should we outperform them? | `competitor-analysis`, `value-curve` |
+| Why would someone switch, and what could bring the next user? | `value-proposition`, `growth-loops` |
 
-## Feature-bundle requests
-
-Example planning request: /Plan Trail Log offline save using requirements, technical design, task dependencies, and acceptance/failure checks. Save the bundle only when explicitly asked.
-
-Example implementation request: /Build the agreed offline-save slice; follow dependency-ready tasks, record actual attempts and checks, and return the review packet. Do not claim the fictional app exists in this template.
-
-Example review request: /QA compare the checked candidate with the requirement IDs and evidence, then report PASS/FAIL/PENDING and the decision needed. Keep required missing review PENDING.
-
-Use the [canonical feature format](../specs/README.md) and its [Trail Log example](../specs/trail-log-offline-save/tasks.md). Automation registration is outside these requests; see the [unregistered recipes](../automation.md).
+[Product Engineering PM skills](https://github.com/phuryn/product-engineering/tree/65444f5140579916b965b8ee157e28728340a518/product)

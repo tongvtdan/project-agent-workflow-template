@@ -21,7 +21,7 @@ Use this skill as a quality gate for non-trivial `<Project Name>` coding, debugg
 - Do not add speculative features, extension points, configuration systems, or new packages.
 - Do not introduce an abstraction for a single caller unless it removes real local complexity.
 - Prefer existing project patterns before new structure.
-- Keep error handling grounded in realistic failure modes for this product (`<failure mode 1>`, `<failure mode 2>`, `<failure mode 3>`).
+- Keep error handling grounded in realistic failure modes for the changed behavior.
 - If the solution feels large relative to the request, reduce scope before editing.
 
 ## Surgical Changes
@@ -33,36 +33,12 @@ Use this skill as a quality gate for non-trivial `<Project Name>` coding, debugg
 
 ## Architectural Boundaries
 
-These are hard constraints — do not cross them without an explicit user decision:
+Use the boundaries and commands configured in root and scoped AGENTS.md. Check existing callers, storage formats and generated sources before changing an interface. For a new dependency, explain its maintenance cost and follow the project’s review rules.
 
-- **State**: `<where state lives, e.g. all application state lives in App.jsx / a specific store>`. Do not move state to new context providers or reducers without discussion.
-- **Core logic**: `<where the core business/domain math lives, e.g. exporters.js, domain/>`. Keep these functions pure and deterministic where possible.
-- **Styles**: reference design tokens via `<token mechanism, e.g. var(--token) from styles.css>`. Never inline color or spacing values.
-- **Client/server boundary**: `<state the boundary, e.g. no backend calls / backend calls only through the API layer>`.
-- **Dependencies**: do not add new packages without discussing the tradeoff first.
+## Correctness and verification
 
-## Correctness Safety Rule
-
-When a value or state cannot be determined confidently, default to the conservative/safe outcome (`<e.g. OPEN, unknown, blocked>`) — never to the optimistic outcome (`<e.g. OK, valid, approved>`). A false positive on `<the domain output that matters, e.g. an inspection report, a financial calculation, a compliance check>` is a trust failure.
-
-## Project Fit
-
-Prioritize work that improves one of:
-
-- **Trust**: `<correctness area 1>`
-- **Distribution**: `<export/share/artifact quality area>`
-- **Activation**: `<time-to-first-value area>`
-
-Challenge work that does not improve one of those outcomes.
-
-## High-Risk Areas
-
-Extra care required before changing these — manually verify all branches after any edit:
-
-- `<critical function 1>` — `<what it computes and why it's risky>`
-- `<critical function 2>` — `<what it computes and why it's risky>`
-- `<critical export/artifact function>` — `<what could silently go wrong>`
+Derive checks from the behavior the user needs. Record what was exercised and keep an unobserved outcome pending. For a change spanning two components, verify the real handoff between them. If a passing test leaves the symptom in place, capture one observation that distinguishes the possible causes.
 
 ## Examples
 
-Read `references/examples.md` when a task involves ambiguous implementation, refactoring, review, or broad changes.
+Use the [Trail Log examples](references/examples.md) for focused changes, boundary checks, and evidence.

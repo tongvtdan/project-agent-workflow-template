@@ -70,6 +70,24 @@ class TemplateValidationTests(unittest.TestCase):
         (self.root / "README.md").unlink()
         self.check("missing required path: README.md")
 
+    def test_missing_client_entry_point(self):
+        for filename in ("CODEX.md", "CLAUDE.md", "GEMINI.md"):
+            with self.subTest(filename=filename):
+                path = self.root / filename
+                original = path.read_bytes()
+                path.unlink()
+                self.check(f"missing required path: {filename}")
+                path.write_bytes(original)
+
+    def test_adapter_must_import_shared_root_instructions(self):
+        for filename in ("CLAUDE.md", "GEMINI.md"):
+            with self.subTest(filename=filename):
+                path = self.root / filename
+                original = path.read_bytes()
+                path.write_text("@app/AGENTS.md\n\n```text\n@AGENTS.md\n```\n")
+                self.check(f"{filename}: expected native import")
+                path.write_bytes(original)
+
     def test_broken_file_link(self):
         self.append(self.root / "README.md", "\n[Broken](missing.md)\n")
         self.check("missing local link target")
