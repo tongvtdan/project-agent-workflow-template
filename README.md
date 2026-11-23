@@ -5,9 +5,8 @@ Give Codex, Claude Code, and Gemini CLI the same project instructions. Start wit
 ## Start a project
 
 1. Choose **Use this template** on GitHub, or copy the starter into a project, including the hidden `.github` directory if you use GitHub. When adopting it in an existing repository, merge the files with your current instructions and CI.
-2. Fill in [AGENTS.md](AGENTS.md) with the purpose, code locations, command working directories, and real commands. Verify the commands against the repository. Keep a scoped [app guide](app/AGENTS.md) only where a directory has additional rules.
-3. Open the project root in your coding agent. Codex reads the shared guide directly. [Claude Code](CLAUDE.md) and [Gemini CLI](GEMINI.md) import it. Ask the agent which directory owns a change and which command checks it. Compare its answer with your configuration.
-4. Describe one observable outcome. Follow [the workflow](WORKFLOW.md) for the type of work. Local work needs only a request. For work that another session will resume, fill in [project state](PROJECT_STATE.md).
+2. Open the new project root in your coding agent and follow the [first-run setup guide](PROJECT_SETUP.md). Start by saying **“Set up this project with me using PROJECT_SETUP.md.”** The agent inspects the checkout, asks for any missing code source, tracker and PRD or brief, and helps you choose the first task.
+3. Confirm the working directory and test command in [AGENTS.md](AGENTS.md). Codex reads it directly. [Claude Code](CLAUDE.md) and [Gemini CLI](GEMINI.md) import it. Follow [the workflow](WORKFLOW.md) when you start the agreed task.
 
 **Try the first request.** In the fictional Trail Log project: “Packed items lose their checkmarks after restart. Reproduce this with a two-item list, check one item, and compare the saved value with what loads after restart. Show me where the values first differ.” Replace that symptom with one from your implementation. The starter contains documentation and a template validator.
 

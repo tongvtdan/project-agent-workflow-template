@@ -14,7 +14,7 @@ The flow is requirements (or bug analysis) → technical design → tasks → im
 | Feature design.md | Technical decisions, interfaces, data flow, failure handling, verification strategy |
 | Feature tasks.md | Task contracts, dependencies, and evidence links |
 | Feature activity.md | Append-only decisions, attempts, actual checks/results, candidate references |
-| GitHub issue/board, when selected in [WORKFLOW.md](../../WORKFLOW.md) | Authoritative issue status |
+| Issue tracker, when selected in [WORKFLOW.md](../../WORKFLOW.md) | Authoritative issue status |
 | [PROJECT_STATE.md](../../PROJECT_STATE.md) | Active feature/task pointer, current candidate, blockers, next action |
 
 Do not maintain another issue-status ledger in tasks.md. Its verification state describes the task evidence, not whether a GitHub issue is closed or a release is approved. Keep only the active pointer in project state; link to the detailed artifacts.

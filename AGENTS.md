@@ -1,11 +1,13 @@
 # Project instructions
 
-Configure this file once for the project. All coding agents use it. Before editing a subdirectory, read the applicable scoped AGENTS.md files from the root to the target. The nearest guide supplies local placement and command details.
+On an initial setup request, follow [the first-run guide](PROJECT_SETUP.md) and configure this file for the project. All coding agents use it. Before editing a subdirectory, read the applicable scoped AGENTS.md files from the root to the target. The nearest guide supplies local placement and command details.
 
 ## Project facts
 
 | Field | Fill from the actual repository |
 | --- | --- |
+| Code source and implementation root | `<repository URL or local folder and owning directory>` |
+| Current PRD or brief | `<file, link, or owner-provided outcome if no separate brief>` |
 | Purpose and user | `<who uses it and what outcome it provides>` |
 | Stack and runtime versions | `<languages, frameworks, supported versions>` |
 | Implementation and test locations | `<paths and responsibilities>` |

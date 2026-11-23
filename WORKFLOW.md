@@ -1,10 +1,10 @@
 # Coding workflow
 
-Start with the authorized request. A local change can go from a request to a reviewed diff. If using GitHub, link the issue and PR. If using a board, choose its Status field or repository status labels as the single authority for issue status.
+Start with the authorized request. A local change can go from a request to a reviewed diff. If using GitHub, link the issue and PR. If using a tracker, choose one authority for task status.
 
 | Project setting | Starting value |
 | --- | --- |
-| Tracking | Local request. For GitHub, enter the repo, verified board if used, and status authority. |
+| Tracking | Local request by default. For GitHub Issues, GitHub Projects or Linear, enter the repository or project reference and the field or labels that own status. |
 | Base branch | Use the actual default branch. |
 | Required checks and reviewers | Preserve existing repository protections. List the actual job names and owners here when configured. |
 
